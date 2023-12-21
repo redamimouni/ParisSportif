@@ -11,7 +11,7 @@ import SwiftUI
 struct ParisSportifApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LeagueList()
         }
     }
 }

@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0E7681782B331BD400DBA0DF /* ParisSportifApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7681772B331BD400DBA0DF /* ParisSportifApp.swift */; };
-		0E76817A2B331BD400DBA0DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7681792B331BD400DBA0DF /* ContentView.swift */; };
+		0E76817A2B331BD400DBA0DF /* LeagueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7681792B331BD400DBA0DF /* LeagueList.swift */; };
 		0E76817C2B331BD500DBA0DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E76817B2B331BD500DBA0DF /* Assets.xcassets */; };
 		0E76817F2B331BD500DBA0DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E76817E2B331BD500DBA0DF /* Preview Assets.xcassets */; };
 		0E7681892B331BD500DBA0DF /* ParisSportifTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7681882B331BD500DBA0DF /* ParisSportifTests.swift */; };
+		0E7681A52B33227600DBA0DF /* LeagueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7681A42B33227600DBA0DF /* LeagueListViewModel.swift */; };
+		0EA15E3B2B34815400DD1E02 /* LeagueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E3A2B34815400DD1E02 /* LeagueModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,11 +29,13 @@
 /* Begin PBXFileReference section */
 		0E7681742B331BD400DBA0DF /* ParisSportif.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParisSportif.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E7681772B331BD400DBA0DF /* ParisSportifApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParisSportifApp.swift; sourceTree = "<group>"; };
-		0E7681792B331BD400DBA0DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0E7681792B331BD400DBA0DF /* LeagueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueList.swift; sourceTree = "<group>"; };
 		0E76817B2B331BD500DBA0DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E76817E2B331BD500DBA0DF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0E7681842B331BD500DBA0DF /* ParisSportifTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParisSportifTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E7681882B331BD500DBA0DF /* ParisSportifTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParisSportifTests.swift; sourceTree = "<group>"; };
+		0E7681A42B33227600DBA0DF /* LeagueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueListViewModel.swift; sourceTree = "<group>"; };
+		0EA15E3A2B34815400DD1E02 /* LeagueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,8 +77,8 @@
 		0E7681762B331BD400DBA0DF /* ParisSportif */ = {
 			isa = PBXGroup;
 			children = (
+				0E7681A12B33224A00DBA0DF /* LeagueList */,
 				0E7681772B331BD400DBA0DF /* ParisSportifApp.swift */,
-				0E7681792B331BD400DBA0DF /* ContentView.swift */,
 				0E76817B2B331BD500DBA0DF /* Assets.xcassets */,
 				0E76817D2B331BD500DBA0DF /* Preview Content */,
 			);
@@ -95,6 +99,40 @@
 				0E7681882B331BD500DBA0DF /* ParisSportifTests.swift */,
 			);
 			path = ParisSportifTests;
+			sourceTree = "<group>";
+		};
+		0E7681A12B33224A00DBA0DF /* LeagueList */ = {
+			isa = PBXGroup;
+			children = (
+				0EA15E372B34811700DD1E02 /* Models */,
+				0E7681A32B33225F00DBA0DF /* ViewModels */,
+				0E7681A22B33225700DBA0DF /* Views */,
+			);
+			path = LeagueList;
+			sourceTree = "<group>";
+		};
+		0E7681A22B33225700DBA0DF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0E7681792B331BD400DBA0DF /* LeagueList.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0E7681A32B33225F00DBA0DF /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0E7681A42B33227600DBA0DF /* LeagueListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0EA15E372B34811700DD1E02 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0EA15E3A2B34815400DD1E02 /* LeagueModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,8 +235,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E76817A2B331BD400DBA0DF /* ContentView.swift in Sources */,
+				0E7681A52B33227600DBA0DF /* LeagueListViewModel.swift in Sources */,
+				0E76817A2B331BD400DBA0DF /* LeagueList.swift in Sources */,
 				0E7681782B331BD400DBA0DF /* ParisSportifApp.swift in Sources */,
+				0EA15E3B2B34815400DD1E02 /* LeagueModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
