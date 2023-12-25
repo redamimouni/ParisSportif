@@ -8,12 +8,12 @@
 import Foundation
 
 // MARK: - LeagueListDTO
-struct LeagueListDTO: Decodable {
+struct LeagueListDTO: Decodable, Equatable {
     let leagues: [League]
 }
 
 // MARK: - League
-struct League: Decodable {
+struct League: Decodable, Equatable {
     let idLeague, strLeague, strSport: String
     let strLeagueAlternate: String?
 }

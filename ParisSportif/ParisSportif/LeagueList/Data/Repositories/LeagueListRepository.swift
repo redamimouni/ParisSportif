@@ -12,12 +12,18 @@ protocol LeagueListRepositoryProtocol {
 }
 
 final class LeagueListRepository: LeagueListRepositoryProtocol {
+    private let urlSession: URLSessionProtocol
+
+    init(urlSession: URLSessionProtocol = URLSession.shared) {
+        self.urlSession = urlSession
+    }
+
     func fetchLeagueList() async throws -> LeagueListDTO {
         guard let request = URLRequest.urlRequestFrom(urlString: APIEndpoints.listing) else {
             throw PSError.wrongUrlError
         }
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
+            let (data, _) = try await self.urlSession.data(with: request)
             return try self.decodeEntityFromData(data: data)
         } catch is PSError {
             throw PSError.parsingError

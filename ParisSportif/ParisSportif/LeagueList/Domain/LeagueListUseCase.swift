@@ -23,5 +23,4 @@ final class LeagueListUseCase: LeagueListUseCaseProtocol {
             try $0.toEntity()
         }
     }
-
 }

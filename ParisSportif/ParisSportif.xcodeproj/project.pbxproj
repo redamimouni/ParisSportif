@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E1FE2202B39D11E00F0255C /* LeagueListUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FE21F2B39D11E00F0255C /* LeagueListUseCaseTests.swift */; };
+		0E1FE2232B39D4FF00F0255C /* LeagueListRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FE2222B39D4FF00F0255C /* LeagueListRepositoryTests.swift */; };
+		0E1FE2252B39DA6C00F0255C /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FE2242B39DA6C00F0255C /* URLSession+Extensions.swift */; };
 		0E7681782B331BD400DBA0DF /* ParisSportifApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7681772B331BD400DBA0DF /* ParisSportifApp.swift */; };
 		0E76817A2B331BD400DBA0DF /* LeagueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7681792B331BD400DBA0DF /* LeagueList.swift */; };
 		0E76817C2B331BD500DBA0DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E76817B2B331BD500DBA0DF /* Assets.xcassets */; };
 		0E76817F2B331BD500DBA0DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E76817E2B331BD500DBA0DF /* Preview Assets.xcassets */; };
-		0E7681892B331BD500DBA0DF /* ParisSportifTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7681882B331BD500DBA0DF /* ParisSportifTests.swift */; };
 		0E7681A52B33227600DBA0DF /* LeagueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7681A42B33227600DBA0DF /* LeagueListViewModel.swift */; };
 		0EA15E3B2B34815400DD1E02 /* LeagueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E3A2B34815400DD1E02 /* LeagueModel.swift */; };
 		0EA15E3F2B3490E900DD1E02 /* LeagueListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E3E2B3490E900DD1E02 /* LeagueListUseCase.swift */; };
@@ -23,6 +25,7 @@
 		0EA15E522B359A5800DD1E02 /* LeagueEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E512B359A5800DD1E02 /* LeagueEntity.swift */; };
 		0EA15E552B397FF200DD1E02 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E542B397FF200DD1E02 /* View+Extensions.swift */; };
 		0EA15E5B2B398C2B00DD1E02 /* LocalizedAlertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E5A2B398C2B00DD1E02 /* LocalizedAlertError.swift */; };
+		0EA15E5E2B39928100DD1E02 /* LeagueListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E5D2B39928100DD1E02 /* LeagueListViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,13 +39,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E1FE21F2B39D11E00F0255C /* LeagueListUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueListUseCaseTests.swift; sourceTree = "<group>"; };
+		0E1FE2222B39D4FF00F0255C /* LeagueListRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueListRepositoryTests.swift; sourceTree = "<group>"; };
+		0E1FE2242B39DA6C00F0255C /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		0E7681742B331BD400DBA0DF /* ParisSportif.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParisSportif.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E7681772B331BD400DBA0DF /* ParisSportifApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParisSportifApp.swift; sourceTree = "<group>"; };
 		0E7681792B331BD400DBA0DF /* LeagueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueList.swift; sourceTree = "<group>"; };
 		0E76817B2B331BD500DBA0DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E76817E2B331BD500DBA0DF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0E7681842B331BD500DBA0DF /* ParisSportifTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParisSportifTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E7681882B331BD500DBA0DF /* ParisSportifTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParisSportifTests.swift; sourceTree = "<group>"; };
 		0E7681A42B33227600DBA0DF /* LeagueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueListViewModel.swift; sourceTree = "<group>"; };
 		0EA15E3A2B34815400DD1E02 /* LeagueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueModel.swift; sourceTree = "<group>"; };
 		0EA15E3E2B3490E900DD1E02 /* LeagueListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueListUseCase.swift; sourceTree = "<group>"; };
@@ -54,6 +59,7 @@
 		0EA15E512B359A5800DD1E02 /* LeagueEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueEntity.swift; sourceTree = "<group>"; };
 		0EA15E542B397FF200DD1E02 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		0EA15E5A2B398C2B00DD1E02 /* LocalizedAlertError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedAlertError.swift; sourceTree = "<group>"; };
+		0EA15E5D2B39928100DD1E02 /* LeagueListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueListViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +80,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E1FE21E2B39D0FA00F0255C /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				0E1FE21F2B39D11E00F0255C /* LeagueListUseCaseTests.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		0E1FE2212B39D4EE00F0255C /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				0E1FE2222B39D4FF00F0255C /* LeagueListRepositoryTests.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		0E76816B2B331BD400DBA0DF = {
 			isa = PBXGroup;
 			children = (
@@ -115,7 +137,9 @@
 		0E7681872B331BD500DBA0DF /* ParisSportifTests */ = {
 			isa = PBXGroup;
 			children = (
-				0E7681882B331BD500DBA0DF /* ParisSportifTests.swift */,
+				0E1FE2212B39D4EE00F0255C /* Repository */,
+				0E1FE21E2B39D0FA00F0255C /* Domain */,
+				0EA15E5C2B39925400DD1E02 /* ViewModel */,
 			);
 			path = ParisSportifTests;
 			sourceTree = "<group>";
@@ -190,6 +214,7 @@
 				0EA15E472B3495B200DD1E02 /* URLRequest+Extensions.swift */,
 				0EA15E492B3495D900DD1E02 /* APIEndPoints.swift */,
 				0EA15E4F2B35949C00DD1E02 /* PSError.swift */,
+				0E1FE2242B39DA6C00F0255C /* URLSession+Extensions.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -218,6 +243,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		0EA15E5C2B39925400DD1E02 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0EA15E5D2B39928100DD1E02 /* LeagueListViewModelTests.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -234,6 +267,8 @@
 			dependencies = (
 			);
 			name = ParisSportif;
+			packageProductDependencies = (
+			);
 			productName = ParisSportif;
 			productReference = 0E7681742B331BD400DBA0DF /* ParisSportif.app */;
 			productType = "com.apple.product-type.application";
@@ -284,6 +319,8 @@
 				Base,
 			);
 			mainGroup = 0E76816B2B331BD400DBA0DF;
+			packageReferences = (
+			);
 			productRefGroup = 0E7681752B331BD400DBA0DF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -330,6 +367,7 @@
 				0EA15E502B35949C00DD1E02 /* PSError.swift in Sources */,
 				0EA15E5B2B398C2B00DD1E02 /* LocalizedAlertError.swift in Sources */,
 				0EA15E552B397FF200DD1E02 /* View+Extensions.swift in Sources */,
+				0E1FE2252B39DA6C00F0255C /* URLSession+Extensions.swift in Sources */,
 				0EA15E3B2B34815400DD1E02 /* LeagueModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,7 +376,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E7681892B331BD500DBA0DF /* ParisSportifTests.swift in Sources */,
+				0E1FE2202B39D11E00F0255C /* LeagueListUseCaseTests.swift in Sources */,
+				0E1FE2232B39D4FF00F0255C /* LeagueListRepositoryTests.swift in Sources */,
+				0EA15E5E2B39928100DD1E02 /* LeagueListViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

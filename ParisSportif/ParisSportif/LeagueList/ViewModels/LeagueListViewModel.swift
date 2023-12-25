@@ -7,8 +7,15 @@
 
 import Foundation
 
+internal enum LoadingState: Equatable {
+    case loading
+    case success(suggestions: [LeagueModel])
+    case failure
+    case empty(message: String)
+}
+
 protocol LeagueListViewModelProtocol: ObservableObject {
-    var suggestions: [LeagueModel] { get }
+    var viewModelState: LoadingState { get }
     var error: Error? { get set }
     func fetchLeagueList()
     func filterLeagueList(with key: String)
@@ -16,7 +23,7 @@ protocol LeagueListViewModelProtocol: ObservableObject {
 
 final class LeagueListViewModel: LeagueListViewModelProtocol {
     private let useCase: any LeagueListUseCaseProtocol
-    @Published var suggestions: [LeagueModel] = []
+    @Published var viewModelState: LoadingState = .loading
     @Published var error: Error?
     private var cachedLeague: [LeagueModel] = []
 
@@ -25,27 +32,27 @@ final class LeagueListViewModel: LeagueListViewModelProtocol {
     }
 
     func fetchLeagueList() {
-        Task.init {
+        Task { @MainActor in
             do {
                 let leagueList = try await self.useCase.fetchLeagueList()
-                await MainActor.run {
-                    self.cachedLeague = leagueList.map {
-                        LeagueModel(idLeague: $0.idLeague, nameLeague: $0.strLeague)
-                    }
-                    self.suggestions = cachedLeague
+                self.cachedLeague = leagueList.map {
+                    LeagueModel(idLeague: $0.idLeague, nameLeague: $0.strLeague)
                 }
+                self.viewModelState = .success(suggestions: cachedLeague)
             } catch {
-                await MainActor.run {
-                    self.error = error
-                }
+                self.error = error
+                self.viewModelState = .failure
             }
         }
     }
 
     func filterLeagueList(with key: String) {
         let lowercasedPrefix = key.lowercased()
-        self.suggestions = self.cachedLeague.filter {
+        let filtred = self.cachedLeague.filter {
             $0.nameLeague.lowercased().hasPrefix(lowercasedPrefix)
         }
+        self.viewModelState = filtred.isEmpty ? 
+            .empty(message: "0 results, try another key word") :
+            .success(suggestions: filtred)
     }
 }

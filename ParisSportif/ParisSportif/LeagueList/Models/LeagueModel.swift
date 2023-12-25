@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LeagueModel: Hashable {
+struct LeagueModel: Hashable, Equatable {
     let idLeague: Int
     let nameLeague: String
 }

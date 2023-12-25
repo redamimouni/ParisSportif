@@ -10,6 +10,7 @@ import SwiftUI
 struct LeagueList<T : LeagueListViewModelProtocol>: View {
     @State var input: String = ""
     @ObservedObject private var viewModel: T
+    private let progressView = ProgressView()
 
     init(viewModel: T = LeagueListViewModel()) {
         self.viewModel = viewModel
@@ -23,17 +24,24 @@ struct LeagueList<T : LeagueListViewModelProtocol>: View {
                 .onChange(of: input) { _, newValue in
                     self.viewModel.filterLeagueList(with: newValue)
                 }
-            List(self.viewModel.suggestions, id: \.self) { suggestion in
-                ZStack {
-                    Text(suggestion.nameLeague)
+            List {
+                let suggestions = self.viewModel.viewModelState
+                switch suggestions {
+                case .loading:
+                    self.progressView
+                case .success(let suggestions):
+                    ForEach(suggestions, id: \.self) { suggestion in
+                        Text(suggestion.nameLeague)
+                    }
+                case .failure:
+                    self.progressView.hidden()
+                case .empty(message: let message):
+                    Text(message)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             }
-        }.errorAlert(error: self.$viewModel.error)
-
-        .onAppear(perform: {
+        }.onAppear {
             self.viewModel.fetchLeagueList()
-        })
+        }.errorAlert(error: self.$viewModel.error)
     }
 }
 

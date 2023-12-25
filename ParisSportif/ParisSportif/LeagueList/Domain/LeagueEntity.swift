@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LeagueEntity {
+struct LeagueEntity: Equatable {
     let idLeague: Int
     let strLeague: String
 }
