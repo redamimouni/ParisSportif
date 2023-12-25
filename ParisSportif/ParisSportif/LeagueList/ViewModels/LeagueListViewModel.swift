@@ -9,22 +9,37 @@ import Foundation
 
 protocol LeagueListViewModelProtocol: ObservableObject {
     var suggestions: [LeagueModel] { get }
-
+    var error: Error? { get set }
     func fetchLeagueList()
     func filterLeagueList(with key: String)
 }
 
 final class LeagueListViewModel: LeagueListViewModelProtocol {
+    private let useCase: any LeagueListUseCaseProtocol
     @Published var suggestions: [LeagueModel] = []
-    private var cachedLeague: [LeagueModel] = [
-        .init(idLeague: "1", nameLeague: "English Premier League"),
-        .init(idLeague: "2", nameLeague: "Scottish Premier League"),
-        .init(idLeague: "3", nameLeague: "German Bundesliga"),
-        .init(idLeague: "4", nameLeague: "Spanish La Liga")
-    ]
+    @Published var error: Error?
+    private var cachedLeague: [LeagueModel] = []
+
+    init(useCase: any LeagueListUseCaseProtocol = LeagueListUseCase()) {
+        self.useCase = useCase
+    }
 
     func fetchLeagueList() {
-        self.suggestions = self.cachedLeague
+        Task.init {
+            do {
+                let leagueList = try await self.useCase.fetchLeagueList()
+                await MainActor.run {
+                    self.cachedLeague = leagueList.map {
+                        LeagueModel(idLeague: $0.idLeague, nameLeague: $0.strLeague)
+                    }
+                    self.suggestions = cachedLeague
+                }
+            } catch {
+                await MainActor.run {
+                    self.error = error
+                }
+            }
+        }
     }
 
     func filterLeagueList(with key: String) {

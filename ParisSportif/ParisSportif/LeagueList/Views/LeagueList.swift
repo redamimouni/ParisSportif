@@ -23,15 +23,17 @@ struct LeagueList<T : LeagueListViewModelProtocol>: View {
                 .onChange(of: input) { _, newValue in
                     self.viewModel.filterLeagueList(with: newValue)
                 }
-        }.onAppear(perform: {
+            List(self.viewModel.suggestions, id: \.self) { suggestion in
+                ZStack {
+                    Text(suggestion.nameLeague)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            }
+        }.errorAlert(error: self.$viewModel.error)
+
+        .onAppear(perform: {
             self.viewModel.fetchLeagueList()
         })
-        List(self.viewModel.suggestions, id: \.self) { suggestion in
-            ZStack {
-                Text(suggestion.nameLeague)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-        }
     }
 }
 

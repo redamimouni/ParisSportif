@@ -8,6 +8,6 @@
 import Foundation
 
 struct LeagueModel: Hashable {
-    let idLeague: String
+    let idLeague: Int
     let nameLeague: String
 }

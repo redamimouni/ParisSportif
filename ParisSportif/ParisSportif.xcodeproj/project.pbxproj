@@ -14,6 +14,15 @@
 		0E7681892B331BD500DBA0DF /* ParisSportifTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7681882B331BD500DBA0DF /* ParisSportifTests.swift */; };
 		0E7681A52B33227600DBA0DF /* LeagueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7681A42B33227600DBA0DF /* LeagueListViewModel.swift */; };
 		0EA15E3B2B34815400DD1E02 /* LeagueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E3A2B34815400DD1E02 /* LeagueModel.swift */; };
+		0EA15E3F2B3490E900DD1E02 /* LeagueListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E3E2B3490E900DD1E02 /* LeagueListUseCase.swift */; };
+		0EA15E422B3491A600DD1E02 /* LeagueListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E412B3491A600DD1E02 /* LeagueListRepository.swift */; };
+		0EA15E482B3495B200DD1E02 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E472B3495B200DD1E02 /* URLRequest+Extensions.swift */; };
+		0EA15E4A2B3495D900DD1E02 /* APIEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E492B3495D900DD1E02 /* APIEndPoints.swift */; };
+		0EA15E4E2B3496FB00DD1E02 /* LeagueListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E4D2B3496FB00DD1E02 /* LeagueListDTO.swift */; };
+		0EA15E502B35949C00DD1E02 /* PSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E4F2B35949C00DD1E02 /* PSError.swift */; };
+		0EA15E522B359A5800DD1E02 /* LeagueEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E512B359A5800DD1E02 /* LeagueEntity.swift */; };
+		0EA15E552B397FF200DD1E02 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E542B397FF200DD1E02 /* View+Extensions.swift */; };
+		0EA15E5B2B398C2B00DD1E02 /* LocalizedAlertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E5A2B398C2B00DD1E02 /* LocalizedAlertError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +45,15 @@
 		0E7681882B331BD500DBA0DF /* ParisSportifTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParisSportifTests.swift; sourceTree = "<group>"; };
 		0E7681A42B33227600DBA0DF /* LeagueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueListViewModel.swift; sourceTree = "<group>"; };
 		0EA15E3A2B34815400DD1E02 /* LeagueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueModel.swift; sourceTree = "<group>"; };
+		0EA15E3E2B3490E900DD1E02 /* LeagueListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueListUseCase.swift; sourceTree = "<group>"; };
+		0EA15E412B3491A600DD1E02 /* LeagueListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueListRepository.swift; sourceTree = "<group>"; };
+		0EA15E472B3495B200DD1E02 /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
+		0EA15E492B3495D900DD1E02 /* APIEndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndPoints.swift; sourceTree = "<group>"; };
+		0EA15E4D2B3496FB00DD1E02 /* LeagueListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueListDTO.swift; sourceTree = "<group>"; };
+		0EA15E4F2B35949C00DD1E02 /* PSError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSError.swift; sourceTree = "<group>"; };
+		0EA15E512B359A5800DD1E02 /* LeagueEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueEntity.swift; sourceTree = "<group>"; };
+		0EA15E542B397FF200DD1E02 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		0EA15E5A2B398C2B00DD1E02 /* LocalizedAlertError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedAlertError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +95,7 @@
 		0E7681762B331BD400DBA0DF /* ParisSportif */ = {
 			isa = PBXGroup;
 			children = (
+				0EA15E432B34954200DD1E02 /* Common */,
 				0E7681A12B33224A00DBA0DF /* LeagueList */,
 				0E7681772B331BD400DBA0DF /* ParisSportifApp.swift */,
 				0E76817B2B331BD500DBA0DF /* Assets.xcassets */,
@@ -104,6 +123,8 @@
 		0E7681A12B33224A00DBA0DF /* LeagueList */ = {
 			isa = PBXGroup;
 			children = (
+				0EA15E402B34919400DD1E02 /* Data */,
+				0EA15E3D2B3490CA00DD1E02 /* Domain */,
 				0EA15E372B34811700DD1E02 /* Models */,
 				0E7681A32B33225F00DBA0DF /* ViewModels */,
 				0E7681A22B33225700DBA0DF /* Views */,
@@ -133,6 +154,68 @@
 				0EA15E3A2B34815400DD1E02 /* LeagueModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		0EA15E3D2B3490CA00DD1E02 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				0EA15E3E2B3490E900DD1E02 /* LeagueListUseCase.swift */,
+				0EA15E512B359A5800DD1E02 /* LeagueEntity.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		0EA15E402B34919400DD1E02 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0EA15E4C2B3496E500DD1E02 /* DTOs */,
+				0EA15E4B2B3496DC00DD1E02 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0EA15E432B34954200DD1E02 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				0EA15E5A2B398C2B00DD1E02 /* LocalizedAlertError.swift */,
+				0EA15E532B397FDE00DD1E02 /* View */,
+				0EA15E442B34954900DD1E02 /* Network */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		0EA15E442B34954900DD1E02 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				0EA15E472B3495B200DD1E02 /* URLRequest+Extensions.swift */,
+				0EA15E492B3495D900DD1E02 /* APIEndPoints.swift */,
+				0EA15E4F2B35949C00DD1E02 /* PSError.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		0EA15E4B2B3496DC00DD1E02 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				0EA15E412B3491A600DD1E02 /* LeagueListRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		0EA15E4C2B3496E500DD1E02 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				0EA15E4D2B3496FB00DD1E02 /* LeagueListDTO.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		0EA15E532B397FDE00DD1E02 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0EA15E542B397FF200DD1E02 /* View+Extensions.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,9 +318,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EA15E422B3491A600DD1E02 /* LeagueListRepository.swift in Sources */,
+				0EA15E482B3495B200DD1E02 /* URLRequest+Extensions.swift in Sources */,
+				0EA15E4E2B3496FB00DD1E02 /* LeagueListDTO.swift in Sources */,
 				0E7681A52B33227600DBA0DF /* LeagueListViewModel.swift in Sources */,
+				0EA15E522B359A5800DD1E02 /* LeagueEntity.swift in Sources */,
 				0E76817A2B331BD400DBA0DF /* LeagueList.swift in Sources */,
+				0EA15E4A2B3495D900DD1E02 /* APIEndPoints.swift in Sources */,
 				0E7681782B331BD400DBA0DF /* ParisSportifApp.swift in Sources */,
+				0EA15E3F2B3490E900DD1E02 /* LeagueListUseCase.swift in Sources */,
+				0EA15E502B35949C00DD1E02 /* PSError.swift in Sources */,
+				0EA15E5B2B398C2B00DD1E02 /* LocalizedAlertError.swift in Sources */,
+				0EA15E552B397FF200DD1E02 /* View+Extensions.swift in Sources */,
 				0EA15E3B2B34815400DD1E02 /* LeagueModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
