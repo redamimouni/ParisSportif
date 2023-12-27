@@ -8,7 +8,7 @@
 import Foundation
 
 protocol LeagueListUseCaseProtocol {
-    func fetchLeagueList() async throws -> [LeagueEntity]
+    func execute() async throws -> [LeagueEntity]
 }
 
 final class LeagueListUseCase: LeagueListUseCaseProtocol {
@@ -18,7 +18,7 @@ final class LeagueListUseCase: LeagueListUseCaseProtocol {
         self.repository = repository
     }
 
-    func fetchLeagueList() async throws -> [LeagueEntity] {
+    func execute() async throws -> [LeagueEntity] {
         try await self.repository.fetchLeagueList().leagues.map {
             try $0.toEntity()
         }

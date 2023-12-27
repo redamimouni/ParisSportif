@@ -8,11 +8,27 @@
 import SwiftUI
 
 struct LeagueDetail: View {
+    @StateObject var viewModel: LeagueDetailViewModel
+    private let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(self.viewModel.teams, id: \.self) { team in
+                    TeamView(team: team)
+                }
+            }
+        }.onAppear(perform: {
+            self.viewModel.fetchTeams()
+        })
+        .overlay(content: {
+            if self.viewModel.isLoading {
+                ProgressView()
+            }
+        })
     }
 }
 
 #Preview {
-    LeagueDetail()
+    LeagueDetail(viewModel: LeagueDetailViewModel(league: LeagueModel(idLeague: 1, nameLeague: "Ligue 1")))
 }

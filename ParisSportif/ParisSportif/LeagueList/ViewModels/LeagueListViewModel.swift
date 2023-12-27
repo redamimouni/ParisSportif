@@ -7,18 +7,8 @@
 
 import Foundation
 
-protocol LeagueListViewModelProtocol: ObservableObject {
-    var suggestions: [LeagueModel] { get }
-    var isLoading: Bool { get }
-    var error: Error? { get set }
-    var searchText: String { get set }
-    var navigationTitle: String { get }
-    var emptyListMessage: String { get }
-
-    func fetchLeagueList()
-}
-
-final class LeagueListViewModel: LeagueListViewModelProtocol {
+@MainActor
+final class LeagueListViewModel: ObservableObject {
     private let useCase: any LeagueListUseCaseProtocol
 
     @Published var suggestions: [LeagueModel] = []
@@ -31,32 +21,34 @@ final class LeagueListViewModel: LeagueListViewModelProtocol {
     }
     let navigationTitle: String = "Master league"
     let emptyListMessage: String = "No league found."
+    let promptMessage: String = "Search for a league"
 
-    private var cachedLeague: [LeagueModel] = []
+    private var cachedLeagues: [LeagueModel] = []
 
     init(useCase: any LeagueListUseCaseProtocol = LeagueListUseCase()) {
         self.useCase = useCase
+        Task {
+            await self.fetchLeagueList()
+        }
     }
 
-    func fetchLeagueList() {
-        Task { @MainActor in
-            do {
-                let leagueList = try await self.useCase.fetchLeagueList()
-                self.cachedLeague = leagueList.map {
-                    LeagueModel(idLeague: $0.idLeague, nameLeague: $0.strLeague)
-                }
-                self.suggestions = self.cachedLeague
-                self.isLoading = false
-            } catch {
-                self.error = error
-                self.isLoading = false
+    private func fetchLeagueList() async {
+        do {
+            let leagueList = try await self.useCase.execute()
+            self.cachedLeagues = leagueList.map {
+                LeagueModel(idLeague: $0.idLeague, nameLeague: $0.strLeague)
             }
+            self.suggestions = self.cachedLeagues
+            self.isLoading = false
+        } catch {
+            self.error = error
+            self.isLoading = false
         }
     }
 
     private func filterLeagueList(with key: String) {
         let lowercasedPrefix = key.lowercased()
-        self.suggestions = self.cachedLeague.filter {
+        self.suggestions = self.cachedLeagues.filter {
             $0.nameLeague.lowercased().hasPrefix(lowercasedPrefix)
         }
     }

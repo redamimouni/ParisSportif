@@ -7,27 +7,19 @@
 
 import SwiftUI
 
-struct LeagueList<T : LeagueListViewModelProtocol>: View {
-    @State var input: String = ""
-    @ObservedObject private var viewModel: T
-
-    init(viewModel: T = LeagueListViewModel()) {
-        self.viewModel = viewModel
-    }
+struct LeagueList: View {
+    @ObservedObject var viewModel: LeagueListViewModel
 
     var body: some View {
         NavigationStack {
             List {
                 ForEach(self.viewModel.suggestions, id: \.self) { suggestion in
                     NavigationLink {
-                        LeagueDetail()
+                        LeagueDetail(viewModel: LeagueDetailViewModel(league: suggestion))
                     } label: {
                         Text(suggestion.nameLeague)
                     }
                 }
-            }
-            .onAppear {
-                self.viewModel.fetchLeagueList()
             }
             .errorAlert(error: self.$viewModel.error)
             .navigationTitle(self.viewModel.navigationTitle)
@@ -41,10 +33,10 @@ struct LeagueList<T : LeagueListViewModelProtocol>: View {
         })
         .navigationViewStyle(.stack)
         .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: self.$viewModel.searchText, prompt: "Search for a league")
+        .searchable(text: self.$viewModel.searchText, prompt: self.viewModel.promptMessage)
     }
 }
 
 #Preview {
-    LeagueList()
+    LeagueList(viewModel: LeagueListViewModel())
 }

@@ -13,6 +13,7 @@ import Combine
 class LeagueListViewModelTests: XCTestCase {
     private var cancellable = Set<AnyCancellable>()
 
+    @MainActor
     func test_isLoading_shouldBeTrue() async {
         // Given
         let sut = LeagueListViewModel()
@@ -25,12 +26,12 @@ class LeagueListViewModelTests: XCTestCase {
         XCTAssertNil(sut.error, "Error should be nil")
     }
 
+    @MainActor 
     func test_fetchLeagueList_shouldSuccess() {
         // Given
         let taskExpectation = XCTestExpectation()
         let useCaseMock = LeagueUseCaseMock()
         useCaseMock.stubbedFetchResult = [.mock()]
-        let sut = LeagueListViewModel(useCase: useCaseMock)
         useCaseMock.$invokedFetch
             .filter { $0 }
             .sink { _ in
@@ -40,7 +41,7 @@ class LeagueListViewModelTests: XCTestCase {
             }.store(in: &cancellable)
 
         // When
-        sut.fetchLeagueList()
+        let sut = LeagueListViewModel(useCase: useCaseMock)
 
         // Then
         wait(for: [taskExpectation])
@@ -50,11 +51,11 @@ class LeagueListViewModelTests: XCTestCase {
         XCTAssertNil(sut.error, "Error should be nil")
     }
 
+    @MainActor 
     func test_fetchLeagueList_shouldSetError() {
         // Given
         let taskExpectation = XCTestExpectation()
         let useCaseMock = LeagueUseCaseMock()
-        let sut = LeagueListViewModel(useCase: useCaseMock)
         useCaseMock.$invokedFetch
             .filter { $0 }
             .sink { _ in
@@ -64,7 +65,7 @@ class LeagueListViewModelTests: XCTestCase {
             }.store(in: &cancellable)
 
         // When
-        sut.fetchLeagueList()
+        let sut = LeagueListViewModel(useCase: useCaseMock)
 
         // Then
         wait(for: [taskExpectation])
@@ -72,12 +73,12 @@ class LeagueListViewModelTests: XCTestCase {
         XCTAssertEqual(sut.error?.localizedDescription, "Fetching data error", "wrong error should be Fetching data error")
     }
 
+    @MainActor 
     func test_searchText_givenS_shouldReturnSpanishLeague() {
         // Given
         let taskExpectation = XCTestExpectation()
         let useCaseMock = LeagueUseCaseMock()
         useCaseMock.stubbedFetchResult = [.mock(), .mock(strLeague: "Spanish League")]
-        let sut = LeagueListViewModel(useCase: useCaseMock)
         useCaseMock.$invokedFetch
             .filter { $0 }
             .sink { _ in
@@ -87,7 +88,7 @@ class LeagueListViewModelTests: XCTestCase {
             }.store(in: &cancellable)
 
         // When
-        sut.fetchLeagueList()
+        let sut = LeagueListViewModel(useCase: useCaseMock)
         wait(for: [taskExpectation])
         sut.searchText = "S"
 
@@ -98,12 +99,12 @@ class LeagueListViewModelTests: XCTestCase {
         XCTAssertNil(sut.error, "Error should be nil")
     }
 
+    @MainActor 
     func test_filterLeagueList_givenQ_shouldReturnNoSuggestions() {
         // Given
         let taskExpectation = XCTestExpectation()
         let useCaseMock = LeagueUseCaseMock()
         useCaseMock.stubbedFetchResult = [.mock(), .mock(strLeague: "Spanish League")]
-        let sut = LeagueListViewModel(useCase: useCaseMock)
         useCaseMock.$invokedFetch
             .filter { $0 }
             .sink { _ in
@@ -113,7 +114,7 @@ class LeagueListViewModelTests: XCTestCase {
             }.store(in: &cancellable)
 
         // When
-        sut.fetchLeagueList()
+        let sut = LeagueListViewModel(useCase: useCaseMock)
         wait(for: [taskExpectation])
         sut.searchText = "Q"
 
@@ -130,7 +131,7 @@ private class LeagueUseCaseMock: LeagueListUseCaseProtocol {
     var invokedFetchCount = 0
     var stubbedFetchResult: [LeagueEntity]?
 
-    func fetchLeagueList() async throws -> [LeagueEntity] {
+    func execute() async throws -> [LeagueEntity] {
         defer {
             invokedFetch = true
         }
