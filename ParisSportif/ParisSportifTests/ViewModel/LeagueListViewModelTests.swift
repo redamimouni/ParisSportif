@@ -13,19 +13,19 @@ import Combine
 class LeagueListViewModelTests: XCTestCase {
     private var cancellable = Set<AnyCancellable>()
 
-    func test_viewModelState_shouldBeLoading() async {
+    func test_isLoading_shouldBeTrue() async {
         // Given
         let sut = LeagueListViewModel()
 
         // When
-        let viewModelState = sut.viewModelState
+        let isLoading = sut.isLoading
 
         // Then
-        XCTAssertEqual(viewModelState, .loading, "wrong viewModelState should be .loading")
+        XCTAssertTrue(isLoading, "wrong isLoading should be true")
         XCTAssertNil(sut.error, "Error should be nil")
     }
 
-    func test_viewModelState_shouldBeSuccess() {
+    func test_fetchLeagueList_shouldSuccess() {
         // Given
         let taskExpectation = XCTestExpectation()
         let useCaseMock = LeagueUseCaseMock()
@@ -44,13 +44,13 @@ class LeagueListViewModelTests: XCTestCase {
 
         // Then
         wait(for: [taskExpectation])
-        let viewModelState = sut.viewModelState
+        let suggestions = sut.suggestions
         XCTAssertEqual(useCaseMock.invokedFetchCount, 1, "wrong useCase should called once")
-        XCTAssertEqual(viewModelState, .success(suggestions: [.mock()]), "wrong viewModelState should be .success")
+        XCTAssertEqual(suggestions, [.mock()], "wrong suggestions should equal to mock")
         XCTAssertNil(sut.error, "Error should be nil")
     }
 
-    func test_viewModelState_shouldBeFailure() {
+    func test_fetchLeagueList_shouldSetError() {
         // Given
         let taskExpectation = XCTestExpectation()
         let useCaseMock = LeagueUseCaseMock()
@@ -68,13 +68,11 @@ class LeagueListViewModelTests: XCTestCase {
 
         // Then
         wait(for: [taskExpectation])
-        let viewModelState = sut.viewModelState
         XCTAssertEqual(useCaseMock.invokedFetchCount, 1, "wrong useCase should called once")
-        XCTAssertEqual(viewModelState, .failure, "wrong viewModelState should be .failure")
         XCTAssertEqual(sut.error?.localizedDescription, "Fetching data error", "wrong error should be Fetching data error")
     }
 
-    func test_filterLeagueList_givenS_shouldReturnSpanishLeague() {
+    func test_searchText_givenS_shouldReturnSpanishLeague() {
         // Given
         let taskExpectation = XCTestExpectation()
         let useCaseMock = LeagueUseCaseMock()
@@ -91,12 +89,12 @@ class LeagueListViewModelTests: XCTestCase {
         // When
         sut.fetchLeagueList()
         wait(for: [taskExpectation])
-        sut.filterLeagueList(with: "S")
+        sut.searchText = "S"
 
         // Then
-        let viewModelState = sut.viewModelState
+        let suggestions = sut.suggestions
         XCTAssertEqual(useCaseMock.invokedFetchCount, 1, "wrong useCase should called once")
-        XCTAssertEqual(viewModelState, .success(suggestions: [.mock(nameLeague: "Spanish League")]), "wrong viewModelState should be .success")
+        XCTAssertEqual(suggestions, [.mock(nameLeague: "Spanish League")], "wrong suggestions should equal to mock")
         XCTAssertNil(sut.error, "Error should be nil")
     }
 
@@ -117,12 +115,12 @@ class LeagueListViewModelTests: XCTestCase {
         // When
         sut.fetchLeagueList()
         wait(for: [taskExpectation])
-        sut.filterLeagueList(with: "Q")
+        sut.searchText = "Q"
 
         // Then
-        let viewModelState = sut.viewModelState
+        let suggestions = sut.suggestions
         XCTAssertEqual(useCaseMock.invokedFetchCount, 1, "wrong useCase should called once")
-        XCTAssertEqual(viewModelState, .empty(message: "0 results, try another key word"), "wrong viewModelState should be .empty")
+        XCTAssertTrue(suggestions.isEmpty, "wrong suggestions should be empty")
         XCTAssertNil(sut.error, "Error should be nil")
     }
 }

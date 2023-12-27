@@ -12,9 +12,9 @@ protocol LeagueListRepositoryProtocol {
 }
 
 final class LeagueListRepository: LeagueListRepositoryProtocol {
-    private let urlSession: URLSessionProtocol
+    private let urlSession: any URLSessionProtocol
 
-    init(urlSession: URLSessionProtocol = URLSession.shared) {
+    init(urlSession: any URLSessionProtocol = URLSession.shared) {
         self.urlSession = urlSession
     }
 
