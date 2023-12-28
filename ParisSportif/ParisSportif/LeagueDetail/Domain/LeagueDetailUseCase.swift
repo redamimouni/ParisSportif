@@ -19,7 +19,7 @@ final class LeagueDetailUseCase: LeagueDetailUseCaseProtocol {
     }
 
     func execute(league: String) async throws -> [TeamEntity] {
-        let teams = try await self.repository.fetchLeagueDetail(for: league).teams
+        let teams = try await self.repository.fetchLeagueDetail(for: league)
             .map {
                 try $0.toEntity()
             }

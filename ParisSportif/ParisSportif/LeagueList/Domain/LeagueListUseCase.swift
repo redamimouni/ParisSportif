@@ -19,7 +19,7 @@ final class LeagueListUseCase: LeagueListUseCaseProtocol {
     }
 
     func execute() async throws -> [LeagueEntity] {
-        try await self.repository.fetchLeagueList().leagues.map {
+        try await self.repository.fetchLeagueList().map {
             try $0.toEntity()
         }
     }

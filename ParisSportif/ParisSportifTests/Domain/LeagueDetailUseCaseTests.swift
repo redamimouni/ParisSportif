@@ -13,7 +13,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
     func test_execute_givenOneTeam_shoudReturnOneEntity() async {
         // Given
         let repositoryMock = LeagueDetailRepositoryMock()
-        repositoryMock.stubbedFetchResult = .mock()
+        repositoryMock.stubbedFetchResult = [.mock()]
         let sut = LeagueDetailUseCase(repository: repositoryMock)
 
         // When
@@ -30,12 +30,12 @@ final class LeagueDetailUseCaseTests: XCTestCase {
     func test_execute_givenThreeTeams_shoudReturnTwoEntities() async {
         // Given
         let repositoryMock = LeagueDetailRepositoryMock()
-        repositoryMock.stubbedFetchResult = .mock(teams: [
+        repositoryMock.stubbedFetchResult = [
             .mock(strTeam: "PSG"),
             .mock(strTeam: "ManU"),
             .mock(strTeam: "OM"),
             .mock(strTeam: "OL")
-        ])
+        ]
         let sut = LeagueDetailUseCase(repository: repositoryMock)
 
         // When
@@ -56,7 +56,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
     func test_execute_givenTenTeams_shoudReturnFiveEntitiesSortByAntiAlphabetic() async {
         // Given
         let repositoryMock = LeagueDetailRepositoryMock()
-        repositoryMock.stubbedFetchResult = .mock(teams: [
+        repositoryMock.stubbedFetchResult = [
             .mock(strTeam: "A"),
             .mock(strTeam: "B"),
             .mock(strTeam: "C"),
@@ -67,7 +67,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
             .mock(strTeam: "H"),
             .mock(strTeam: "I"),
             .mock(strTeam: "J")
-        ])
+        ]
         let sut = LeagueDetailUseCase(repository: repositoryMock)
 
         // When
@@ -113,9 +113,9 @@ final class LeagueDetailUseCaseTests: XCTestCase {
 }
 
 private class LeagueDetailRepositoryMock: LeagueDetailRepositoryProtocol {
-    var stubbedFetchResult: LeagueDetailDTO?
+    var stubbedFetchResult: [TeamDTO]?
 
-    func fetchLeagueDetail(for name: String) async throws -> LeagueDetailDTO {
+    func fetchLeagueDetail(for name: String) async throws -> [TeamDTO] {
         guard let result = stubbedFetchResult else { throw PSError.errorDataFetch }
         return result
     }

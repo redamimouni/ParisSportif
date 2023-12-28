@@ -14,7 +14,7 @@ class LeagueListUseCaseTests: XCTestCase {
     func test_fetchLeagueList_shouldSuccess() async {
         // Given
         let repositoryMock = LeagueListRepositoryMock()
-        repositoryMock.stubbedFetchResult = .mock()
+        repositoryMock.stubbedFetchResult = [.mock()]
         let sut = LeagueListUseCase(repository: repositoryMock)
 
         // When
@@ -47,29 +47,13 @@ class LeagueListUseCaseTests: XCTestCase {
             )
         }
     }
-
-    func test_fetchLeagueList_shouldThrowTypeConversionError() async {
-        // Given
-        let repositoryMock = LeagueListRepositoryMock()
-        repositoryMock.stubbedFetchResult = .mock(idLeague: "notANumber")
-        let sut = LeagueListUseCase(repository: repositoryMock)
-
-        // When
-        do {
-            let _ = try await sut.execute()
-
-            // Then
-            XCTFail("Should throw error")
-        } catch {
-            XCTAssertEqual(error.localizedDescription, "Type conversion error", "message should be Fetching data error")
-        }
-    }
 }
 
 private class LeagueListRepositoryMock: LeagueListRepositoryProtocol {
-    var stubbedFetchResult: LeagueListDTO?
+    
+    var stubbedFetchResult: [LeagueDTO]?
 
-    func fetchLeagueList() async throws -> LeagueListDTO {
+    func fetchLeagueList() async throws -> [LeagueDTO] {
         guard let result = stubbedFetchResult else { throw PSError.errorDataFetch }
         return result
     }

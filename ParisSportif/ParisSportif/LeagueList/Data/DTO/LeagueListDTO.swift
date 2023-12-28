@@ -9,16 +9,16 @@ import Foundation
 
 // MARK: - LeagueListDTO
 struct LeagueListDTO: Decodable, Equatable {
-    let leagues: [League]
+    let leagues: [LeagueDTO]
 }
 
 // MARK: - League
-struct League: Decodable, Equatable {
+struct LeagueDTO: Decodable, Equatable {
     let idLeague, strLeague, strSport: String
     let strLeagueAlternate: String?
 }
 
-extension League {
+extension LeagueDTO {
     func toEntity() throws -> LeagueEntity {
         guard let idLeagueInt = Int(idLeague) else {
             throw PSError.typeConversionError

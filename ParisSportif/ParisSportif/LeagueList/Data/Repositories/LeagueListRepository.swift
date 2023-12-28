@@ -8,35 +8,21 @@
 import Foundation
 
 protocol LeagueListRepositoryProtocol {
-    func fetchLeagueList() async throws -> LeagueListDTO
+    func fetchLeagueList() async throws -> [LeagueDTO]
 }
 
 final class LeagueListRepository: LeagueListRepositoryProtocol {
-    private let urlSession: any URLSessionProtocol
+    private let apiCaller: any APICallerProtocol
 
-    init(urlSession: any URLSessionProtocol = URLSession.shared) {
-        self.urlSession = urlSession
+    init(apiCaller: any APICallerProtocol = APICaller()) {
+        self.apiCaller = apiCaller
     }
 
-    func fetchLeagueList() async throws -> LeagueListDTO {
+    func fetchLeagueList() async throws -> [LeagueDTO] {
         guard let request = URLRequest.urlRequestFrom(urlString: APIEndpoints.listing) else {
             throw PSError.wrongUrlError
         }
-        do {
-            let (data, _) = try await self.urlSession.data(with: request)
-            return try self.decodeEntityFromData(data: data)
-        } catch is PSError {
-            throw PSError.parsingError
-        } catch {
-            throw PSError.errorDataFetch
-        }
-    }
-
-    private func decodeEntityFromData(data: Data) throws -> LeagueListDTO {
-        do {
-            return try JSONDecoder().decode(LeagueListDTO.self, from: data)
-        } catch {
-            throw PSError.parsingError
-        }
+        let dto: LeagueListDTO = try await self.apiCaller.perform(request)
+        return dto.leagues
     }
 }
