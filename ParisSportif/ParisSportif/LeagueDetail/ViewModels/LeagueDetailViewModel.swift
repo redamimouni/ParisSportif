@@ -33,8 +33,8 @@ final class LeagueDetailViewModel: ObservableObject {
                 }
                 self.isLoading = false
             } catch {
-                self.error = error
                 self.isLoading = false
+                self.error = error
             }
         }
     }

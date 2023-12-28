@@ -40,7 +40,11 @@ class LeagueListUseCaseTests: XCTestCase {
             // Then
             XCTFail("Should throw error")
         } catch {
-            XCTAssertEqual(error.localizedDescription, "Fetching data error", "message should be Fetching data error")
+            XCTAssertEqual(
+                error.localizedDescription,
+                "Fetching data error",
+                "message should be Fetching data error"
+            )
         }
     }
 

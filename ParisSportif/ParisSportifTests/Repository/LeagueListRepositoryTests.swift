@@ -66,7 +66,7 @@ class LeagueListRepositoryTests: XCTestCase {
     }
 }
 
-private class URLSessionMock: URLSessionProtocol {
+final class URLSessionMock: URLSessionProtocol {
     var stubbedFetchResult: (Data, URLResponse)?
 
     func data(with request: URLRequest) async throws -> (Data, URLResponse) {

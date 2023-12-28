@@ -30,7 +30,7 @@ class LeagueListViewModelTests: XCTestCase {
     func test_fetchLeagueList_shouldSuccess() {
         // Given
         let taskExpectation = XCTestExpectation()
-        let useCaseMock = LeagueUseCaseMock()
+        let useCaseMock = LeagueListUseCaseMock()
         useCaseMock.stubbedFetchResult = [.mock()]
         useCaseMock.$invokedFetch
             .filter { $0 }
@@ -38,7 +38,7 @@ class LeagueListViewModelTests: XCTestCase {
                 Task {
                     taskExpectation.fulfill()
                 }
-            }.store(in: &cancellable)
+            }.store(in: &self.cancellable)
 
         // When
         let sut = LeagueListViewModel(useCase: useCaseMock)
@@ -49,20 +49,21 @@ class LeagueListViewModelTests: XCTestCase {
         XCTAssertEqual(useCaseMock.invokedFetchCount, 1, "wrong useCase should called once")
         XCTAssertEqual(suggestions, [.mock()], "wrong suggestions should equal to mock")
         XCTAssertNil(sut.error, "Error should be nil")
+        XCTAssertFalse(sut.isLoading, "wrong isLoading should be false")
     }
 
     @MainActor 
     func test_fetchLeagueList_shouldSetError() {
         // Given
         let taskExpectation = XCTestExpectation()
-        let useCaseMock = LeagueUseCaseMock()
+        let useCaseMock = LeagueListUseCaseMock()
         useCaseMock.$invokedFetch
             .filter { $0 }
             .sink { _ in
                 Task {
                     taskExpectation.fulfill()
                 }
-            }.store(in: &cancellable)
+            }.store(in: &self.cancellable)
 
         // When
         let sut = LeagueListViewModel(useCase: useCaseMock)
@@ -71,13 +72,14 @@ class LeagueListViewModelTests: XCTestCase {
         wait(for: [taskExpectation])
         XCTAssertEqual(useCaseMock.invokedFetchCount, 1, "wrong useCase should called once")
         XCTAssertEqual(sut.error?.localizedDescription, "Fetching data error", "wrong error should be Fetching data error")
+        XCTAssertFalse(sut.isLoading, "wrong isLoading should be false")
     }
 
     @MainActor 
     func test_searchText_givenS_shouldReturnSpanishLeague() {
         // Given
         let taskExpectation = XCTestExpectation()
-        let useCaseMock = LeagueUseCaseMock()
+        let useCaseMock = LeagueListUseCaseMock()
         useCaseMock.stubbedFetchResult = [.mock(), .mock(strLeague: "Spanish League")]
         useCaseMock.$invokedFetch
             .filter { $0 }
@@ -85,7 +87,7 @@ class LeagueListViewModelTests: XCTestCase {
                 Task {
                     taskExpectation.fulfill()
                 }
-            }.store(in: &cancellable)
+            }.store(in: &self.cancellable)
 
         // When
         let sut = LeagueListViewModel(useCase: useCaseMock)
@@ -97,13 +99,14 @@ class LeagueListViewModelTests: XCTestCase {
         XCTAssertEqual(useCaseMock.invokedFetchCount, 1, "wrong useCase should called once")
         XCTAssertEqual(suggestions, [.mock(nameLeague: "Spanish League")], "wrong suggestions should equal to mock")
         XCTAssertNil(sut.error, "Error should be nil")
+        XCTAssertFalse(sut.isLoading, "wrong isLoading should be false")
     }
 
     @MainActor 
     func test_filterLeagueList_givenQ_shouldReturnNoSuggestions() {
         // Given
         let taskExpectation = XCTestExpectation()
-        let useCaseMock = LeagueUseCaseMock()
+        let useCaseMock = LeagueListUseCaseMock()
         useCaseMock.stubbedFetchResult = [.mock(), .mock(strLeague: "Spanish League")]
         useCaseMock.$invokedFetch
             .filter { $0 }
@@ -123,10 +126,11 @@ class LeagueListViewModelTests: XCTestCase {
         XCTAssertEqual(useCaseMock.invokedFetchCount, 1, "wrong useCase should called once")
         XCTAssertTrue(suggestions.isEmpty, "wrong suggestions should be empty")
         XCTAssertNil(sut.error, "Error should be nil")
+        XCTAssertFalse(sut.isLoading, "wrong isLoading should be false")
     }
 }
 
-private class LeagueUseCaseMock: LeagueListUseCaseProtocol {
+private class LeagueListUseCaseMock: LeagueListUseCaseProtocol {
     @Published private(set) var invokedFetch = false
     var invokedFetchCount = 0
     var stubbedFetchResult: [LeagueEntity]?

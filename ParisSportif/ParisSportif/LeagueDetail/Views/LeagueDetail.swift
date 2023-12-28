@@ -18,7 +18,9 @@ struct LeagueDetail: View {
                     TeamView(team: team)
                 }
             }
-        }.onAppear(perform: {
+        }
+        .errorAlert(error: self.$viewModel.error)
+        .onAppear(perform: {
             self.viewModel.fetchTeams()
         })
         .overlay(content: {
