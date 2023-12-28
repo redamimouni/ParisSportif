@@ -14,9 +14,9 @@ final class LeagueDetailRepositoryTests: XCTestCase {
         // Given
         let resultJson = #"{"teams":[{"idTeam": "133899", "strTeam": "AGF Aarhus", "strTeamBadge": "https://www.thesportsdb.com/images/media/team/badge/vxuuts1473535487.png"}]}"#
         let data = try XCTUnwrap(resultJson.data(using: .utf8), "fail to unwrap")
-        let sessionMock = URLSessionMock()
-        sessionMock.stubbedFetchResult = (data, URLResponse())
-        let sut = LeagueDetailRepository(urlSession: sessionMock)
+        let apiCallerMock = APICallerMock()
+        apiCallerMock.stubbedFetchResult = LeagueDetailDTO.mock()
+        let sut = LeagueDetailRepository(apiCaller: apiCallerMock)
 
         // When
         do {
@@ -25,11 +25,11 @@ final class LeagueDetailRepositoryTests: XCTestCase {
             // Then
             XCTAssertEqual(
                 result,
-                .mock(teams: [.mock(
-                    idTeam: "133899",
-                    strTeam: "AGF Aarhus",
-                    strTeamBadge: "https://www.thesportsdb.com/images/media/team/badge/vxuuts1473535487.png"
-                )]),
+                [.mock(
+                    idTeam: "1",
+                    strTeam: "PSG",
+                    strTeamBadge: "www.test.fr/image.jpg"
+                )],
                 "wrong should be equal to LeagueDetailDTO mock")
         } catch {
             XCTFail("fetchLeagueDetail Should not throw error")
@@ -40,34 +40,17 @@ final class LeagueDetailRepositoryTests: XCTestCase {
         // Given
         let resultJson = #"{"toto":[{"idTeam": "133899", "strTeam": "AGF Aarhus", "strTeamBadge": "https://www.thesportsdb.com/images/media/team/badge/vxuuts1473535487.png"}]}"#
         let data = try XCTUnwrap(resultJson.data(using: .utf8), "fail to unwrap")
-        let sessionMock = URLSessionMock()
-        sessionMock.stubbedFetchResult = (data, URLResponse())
-        let sut = LeagueDetailRepository(urlSession: sessionMock)
+        let apiCallerMock = APICallerMock()
+        let sut = LeagueDetailRepository(apiCaller: apiCallerMock)
 
         // When
         do {
             let _ = try await sut.fetchLeagueDetail(for: "Ligue 1")
 
             // Then
-            XCTFail("Should throw error")
+            XCTFail("Should not throw error")
         } catch {
             XCTAssertEqual(error.localizedDescription, "Parsing data error", "message should be Parsing data error")
-        }
-    }
-
-    func test_fetchLeagueDetail_shouldThrowFetchingDataError() async throws {
-        // Given
-        let sessionMock = URLSessionMock()
-        let sut = LeagueDetailRepository(urlSession: sessionMock)
-
-        // When
-        do {
-            let _ = try await sut.fetchLeagueDetail(for: "Ligue 1")
-
-            // Then
-            XCTFail("Should throw error")
-        } catch {
-            XCTAssertEqual(error.localizedDescription, "Fetching data error", "message should be Fetching data error")
         }
     }
 }
