@@ -7,52 +7,49 @@
 
 import Foundation
 
-internal enum LoadingState: Equatable {
-    case loading
-    case success(suggestions: [LeagueModel])
-    case failure
-    case empty(message: String)
-}
-
-protocol LeagueListViewModelProtocol: ObservableObject {
-    var viewModelState: LoadingState { get }
-    var error: Error? { get set }
-    func fetchLeagueList()
-    func filterLeagueList(with key: String)
-}
-
-final class LeagueListViewModel: LeagueListViewModelProtocol {
+@MainActor
+final class LeagueListViewModel: ObservableObject {
     private let useCase: any LeagueListUseCaseProtocol
-    @Published var viewModelState: LoadingState = .loading
+
+    @Published var suggestions: [LeagueModel] = []
+    @Published var isLoading: Bool = true
     @Published var error: Error?
-    private var cachedLeague: [LeagueModel] = []
+    @Published var searchText: String = "" {
+        didSet {
+            self.filterLeagueList(with: searchText)
+        }
+    }
+    let navigationTitle: String = "Master league"
+    let emptyListMessage: String = "No league found."
+    let promptMessage: String = "Search for a league"
+
+    private var cachedLeagues: [LeagueModel] = []
 
     init(useCase: any LeagueListUseCaseProtocol = LeagueListUseCase()) {
         self.useCase = useCase
-    }
-
-    func fetchLeagueList() {
-        Task { @MainActor in
-            do {
-                let leagueList = try await self.useCase.fetchLeagueList()
-                self.cachedLeague = leagueList.map {
-                    LeagueModel(idLeague: $0.idLeague, nameLeague: $0.strLeague)
-                }
-                self.viewModelState = .success(suggestions: cachedLeague)
-            } catch {
-                self.error = error
-                self.viewModelState = .failure
-            }
+        Task {
+            await self.fetchLeagueList()
         }
     }
 
-    func filterLeagueList(with key: String) {
+    private func fetchLeagueList() async {
+        do {
+            let leagueList = try await self.useCase.execute()
+            self.cachedLeagues = leagueList.map {
+                LeagueModel(idLeague: $0.idLeague, nameLeague: $0.strLeague)
+            }
+            self.suggestions = self.cachedLeagues
+            self.isLoading = false
+        } catch {
+            self.error = error
+            self.isLoading = false
+        }
+    }
+
+    private func filterLeagueList(with key: String) {
         let lowercasedPrefix = key.lowercased()
-        let filtred = self.cachedLeague.filter {
+        self.suggestions = self.cachedLeagues.filter {
             $0.nameLeague.lowercased().hasPrefix(lowercasedPrefix)
         }
-        self.viewModelState = filtred.isEmpty ? 
-            .empty(message: "0 results, try another key word") :
-            .success(suggestions: filtred)
     }
 }

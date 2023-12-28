@@ -7,44 +7,36 @@
 
 import SwiftUI
 
-struct LeagueList<T : LeagueListViewModelProtocol>: View {
-    @State var input: String = ""
-    @ObservedObject private var viewModel: T
-    private let progressView = ProgressView()
-
-    init(viewModel: T = LeagueListViewModel()) {
-        self.viewModel = viewModel
-    }
+struct LeagueList: View {
+    @ObservedObject var viewModel: LeagueListViewModel
 
     var body: some View {
-        VStack {
-            TextField("Search by league", text: $input)
-                .textFieldStyle(.roundedBorder)
-                .padding()
-                .onChange(of: input) { _, newValue in
-                    self.viewModel.filterLeagueList(with: newValue)
-                }
+        NavigationStack {
             List {
-                let suggestions = self.viewModel.viewModelState
-                switch suggestions {
-                case .loading:
-                    self.progressView
-                case .success(let suggestions):
-                    ForEach(suggestions, id: \.self) { suggestion in
+                ForEach(self.viewModel.suggestions, id: \.self) { suggestion in
+                    NavigationLink {
+                        LeagueDetail(viewModel: LeagueDetailViewModel(league: suggestion))
+                    } label: {
                         Text(suggestion.nameLeague)
                     }
-                case .failure:
-                    self.progressView.hidden()
-                case .empty(message: let message):
-                    Text(message)
                 }
             }
-        }.onAppear {
-            self.viewModel.fetchLeagueList()
-        }.errorAlert(error: self.$viewModel.error)
+            .errorAlert(error: self.$viewModel.error)
+            .navigationTitle(self.viewModel.navigationTitle)
+        }
+        .overlay(content: {
+            if self.viewModel.isLoading {
+                ProgressView()
+            } else if self.viewModel.suggestions.isEmpty {
+                Text(self.viewModel.emptyListMessage)
+            }
+        })
+        .navigationViewStyle(.stack)
+        .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: self.$viewModel.searchText, prompt: self.viewModel.promptMessage)
     }
 }
 
 #Preview {
-    LeagueList()
+    LeagueList(viewModel: LeagueListViewModel())
 }

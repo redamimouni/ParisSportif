@@ -1,25 +1,25 @@
 //
-//  LeagueListRepository.swift
+//  LeagueDetailRepository.swift
 //  ParisSportif
 //
-//  Created by reda.mimouni.ext on 21/12/2023.
+//  Created by reda.mimouni.ext on 27/12/2023.
 //
 
 import Foundation
 
-protocol LeagueListRepositoryProtocol {
-    func fetchLeagueList() async throws -> LeagueListDTO
+protocol LeagueDetailRepositoryProtocol {
+    func fetchLeagueDetail(for name: String) async throws -> LeagueDetailDTO
 }
 
-final class LeagueListRepository: LeagueListRepositoryProtocol {
+final class LeagueDetailRepository: LeagueDetailRepositoryProtocol {
     private let urlSession: any URLSessionProtocol
 
     init(urlSession: any URLSessionProtocol = URLSession.shared) {
         self.urlSession = urlSession
     }
 
-    func fetchLeagueList() async throws -> LeagueListDTO {
-        guard let request = URLRequest.urlRequestFrom(urlString: APIEndpoints.listing) else {
+    func fetchLeagueDetail(for name: String) async throws -> LeagueDetailDTO {
+        guard let request = URLRequest.urlRequestFrom(urlString: APIEndpoints.searchAllTeams(for: name)) else {
             throw PSError.wrongUrlError
         }
         do {
@@ -32,9 +32,9 @@ final class LeagueListRepository: LeagueListRepositoryProtocol {
         }
     }
 
-    private func decodeEntityFromData(data: Data) throws -> LeagueListDTO {
+    private func decodeEntityFromData(data: Data) throws -> LeagueDetailDTO {
         do {
-            return try JSONDecoder().decode(LeagueListDTO.self, from: data)
+            return try JSONDecoder().decode(LeagueDetailDTO.self, from: data)
         } catch {
             throw PSError.parsingError
         }

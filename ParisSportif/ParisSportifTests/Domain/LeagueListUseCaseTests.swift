@@ -19,7 +19,7 @@ class LeagueListUseCaseTests: XCTestCase {
 
         // When
         do {
-            let result = try await sut.fetchLeagueList()
+            let result = try await sut.execute()
 
             // Then
             XCTAssertEqual(result, [.init(idLeague: 4328, strLeague: "English Premier League")], "wrong result shoud be id 4328 strLeague English Premier League")
@@ -35,12 +35,16 @@ class LeagueListUseCaseTests: XCTestCase {
 
         // When
         do {
-            let _ = try await sut.fetchLeagueList()
+            let _ = try await sut.execute()
 
             // Then
             XCTFail("Should throw error")
         } catch {
-            XCTAssertEqual(error.localizedDescription, "Fetching data error", "message should be Fetching data error")
+            XCTAssertEqual(
+                error.localizedDescription,
+                "Fetching data error",
+                "message should be Fetching data error"
+            )
         }
     }
 
@@ -52,7 +56,7 @@ class LeagueListUseCaseTests: XCTestCase {
 
         // When
         do {
-            let _ = try await sut.fetchLeagueList()
+            let _ = try await sut.execute()
 
             // Then
             XCTFail("Should throw error")
