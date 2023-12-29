@@ -12,8 +12,6 @@ import XCTest
 final class LeagueDetailRepositoryTests: XCTestCase {
     func test_fetchLeagueDetail_shouldReturnSuccess() async throws {
         // Given
-        let resultJson = #"{"teams":[{"idTeam": "133899", "strTeam": "AGF Aarhus", "strTeamBadge": "https://www.thesportsdb.com/images/media/team/badge/vxuuts1473535487.png"}]}"#
-        let data = try XCTUnwrap(resultJson.data(using: .utf8), "fail to unwrap")
         let apiCallerMock = APICallerMock()
         apiCallerMock.stubbedFetchResult = LeagueDetailDTO.mock()
         let sut = LeagueDetailRepository(apiCaller: apiCallerMock)
@@ -38,8 +36,6 @@ final class LeagueDetailRepositoryTests: XCTestCase {
 
     func test_fetchLeagueDetail_shouldThrowParsingDataError() async throws {
         // Given
-        let resultJson = #"{"toto":[{"idTeam": "133899", "strTeam": "AGF Aarhus", "strTeamBadge": "https://www.thesportsdb.com/images/media/team/badge/vxuuts1473535487.png"}]}"#
-        let data = try XCTUnwrap(resultJson.data(using: .utf8), "fail to unwrap")
         let apiCallerMock = APICallerMock()
         let sut = LeagueDetailRepository(apiCaller: apiCallerMock)
 

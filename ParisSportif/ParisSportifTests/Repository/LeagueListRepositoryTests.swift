@@ -13,8 +13,6 @@ class LeagueListRepositoryTests: XCTestCase {
     
     func test_fetchLeagueList_shouldReturnSuccess() async throws {
         // Given
-        let resultJson = #"{"leagues": [{"idLeague":"4328","strLeague":"English Premier League","strSport":"Soccer","strLeagueAlternate":"Premier League, EPL"}]}"#
-        let data = try XCTUnwrap(resultJson.data(using: .utf8), "fail to unwrap")
         let apiCallerMock = APICallerMock()
         apiCallerMock.stubbedFetchResult = LeagueListDTO.mock()
         let sut = LeagueListRepository(apiCaller: apiCallerMock)
@@ -32,8 +30,6 @@ class LeagueListRepositoryTests: XCTestCase {
 
     func test_fetchLeagueList_shouldThrowParsingDataError() async throws {
         // Given
-        let resultJson = #"{"lea": [{"idLeague":"4328","strLeague":"English Premier League","strSport":"Soccer","strLeagueAlternate":"Premier League, EPL"}]}"#
-        let data = try XCTUnwrap(resultJson.data(using: .utf8), "fail to unwrap")
         let apiCallerMock = APICallerMock()
         let sut = LeagueListRepository(apiCaller: apiCallerMock)
 
