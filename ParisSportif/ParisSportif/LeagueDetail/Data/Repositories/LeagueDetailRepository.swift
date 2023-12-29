@@ -19,7 +19,7 @@ final class LeagueDetailRepository: LeagueDetailRepositoryProtocol {
     }
 
     func fetchLeagueDetail(for name: String) async throws -> [TeamDTO] {
-        guard let request = URLRequest.urlRequestFrom(urlString: APIEndpoints.searchAllTeams(for: name)) else {
+        guard let request = URLRequest.buildRequest(from: APIEndpoints.searchAllTeams(for: name)) else {
             throw PSError.wrongUrlError
         }
         do {

@@ -19,7 +19,7 @@ final class LeagueListRepository: LeagueListRepositoryProtocol {
     }
 
     func fetchLeagueList() async throws -> [LeagueDTO] {
-        guard let request = URLRequest.urlRequestFrom(urlString: APIEndpoints.listing) else {
+        guard let request = URLRequest.buildRequest(from: APIEndpoints.listing) else {
             throw PSError.wrongUrlError
         }
         let dto: LeagueListDTO = try await self.apiCaller.perform(request)

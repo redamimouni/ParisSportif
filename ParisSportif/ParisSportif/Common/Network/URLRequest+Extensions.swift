@@ -8,7 +8,7 @@
 import Foundation
 
 extension URLRequest {
-    static func urlRequestFrom(urlString: String) -> URLRequest? {
+    static func buildRequest(from urlString: String) -> URLRequest? {
         guard let url = URL(string: urlString) else {
             return nil
         }

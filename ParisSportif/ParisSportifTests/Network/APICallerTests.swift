@@ -21,7 +21,7 @@ final class APICallerTests: XCTestCase {
 
         // When
         do {
-            let request = try XCTUnwrap(URLRequest.urlRequestFrom(urlString: APIEndpoints.listing))
+            let request = try XCTUnwrap(URLRequest.buildRequest(from: APIEndpoints.listing))
             let result: LeagueListDTO = try await sut.perform(request)
 
             // Then
@@ -42,7 +42,7 @@ final class APICallerTests: XCTestCase {
 
         // When
         do {
-            let request = try XCTUnwrap(URLRequest.urlRequestFrom(urlString: APIEndpoints.listing))
+            let request = try XCTUnwrap(URLRequest.buildRequest(from: APIEndpoints.listing))
             let result: LeagueDetailDTO = try await sut.perform(request)
 
             // Then
@@ -63,7 +63,7 @@ final class APICallerTests: XCTestCase {
 
         // When
         do {
-            let request = try XCTUnwrap(URLRequest.urlRequestFrom(urlString: APIEndpoints.listing))
+            let request = try XCTUnwrap(URLRequest.buildRequest(from: APIEndpoints.listing))
             let _: LeagueDetailDTO = try await sut.perform(request)
 
             // Then
@@ -84,7 +84,7 @@ final class APICallerTests: XCTestCase {
 
         // When
         do {
-            let request = try XCTUnwrap(URLRequest.urlRequestFrom(urlString: APIEndpoints.listing))
+            let request = try XCTUnwrap(URLRequest.buildRequest(from: APIEndpoints.listing))
             let _: LeagueListDTO = try await sut.perform(request)
 
             // Then
@@ -104,7 +104,7 @@ final class APICallerTests: XCTestCase {
 
         // When
         do {
-            let request = try XCTUnwrap(URLRequest.urlRequestFrom(urlString: APIEndpoints.listing))
+            let request = try XCTUnwrap(URLRequest.buildRequest(from: APIEndpoints.listing))
             let _: LeagueDetailDTO = try await sut.perform(request)
 
             // Then
@@ -119,7 +119,7 @@ final class URLSessionMock: URLSessionProtocol {
     var stubbedFetchResult: (Data, URLResponse)?
 
     func data(with request: URLRequest) async throws -> (Data, URLResponse) {
-        guard let result = stubbedFetchResult else { throw URLError.init(.badServerResponse) }
+        guard let result = stubbedFetchResult else { throw PSError.httpRequestError }
         return result
     }
 }
