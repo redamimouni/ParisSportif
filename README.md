@@ -27,14 +27,14 @@ This architecture promotes a modular and testable codebase, making it easier to 
 The app takes advantage of the async/await paradigm to handle asynchronous tasks in a more concise and readable manner. This ensures that the UI remains responsive while fetching and processing data.
 
 ### Unit Testing:
-The project has a test coverage of 83%, ensuring the reliability and stability of the codebase. The tests cover various aspects, including ViewModel logic, data processing, and UI behavior.
+The project has a test coverage of 84%, ensuring the reliability and stability of the codebase. The tests cover various aspects, including ViewModel logic, data processing, and UI behavior.
 
 ### Improvements ideas:
 Some improvements can be made, as:
 
 - Adding some UI/Snapshot tests to test the views
 - Create a service layer that will build the requests and perform the calls.
-- Separate the network layer in an external core package (SPM for example).
+- Separate the network layer in an external core package (SPM for example) so it can be maintained easily.
 
 ### Requirements:
 iOS 17.0+
