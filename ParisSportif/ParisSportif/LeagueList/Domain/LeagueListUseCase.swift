@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LeagueListUseCaseProtocol {
+protocol LeagueListUseCaseProtocol: Sendable {
     func execute() async throws -> [LeagueEntity]
 }
 

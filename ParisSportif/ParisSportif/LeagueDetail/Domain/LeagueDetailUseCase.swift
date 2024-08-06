@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LeagueDetailUseCaseProtocol {
+protocol LeagueDetailUseCaseProtocol: Sendable {
     func execute(league: String) async throws -> [TeamEntity]
 }
 

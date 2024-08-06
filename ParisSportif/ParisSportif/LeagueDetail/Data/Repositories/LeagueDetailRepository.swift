@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LeagueDetailRepositoryProtocol {
+protocol LeagueDetailRepositoryProtocol: Sendable {
     func fetchLeagueDetail(for name: String) async throws -> [TeamDTO]
 }
 
