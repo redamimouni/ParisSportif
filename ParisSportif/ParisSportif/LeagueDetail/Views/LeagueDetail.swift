@@ -20,9 +20,9 @@ struct LeagueDetail: View {
             }
         }
         .errorAlert(error: self.$viewModel.error)
-        .onAppear(perform: {
-            self.viewModel.fetchTeams()
-        })
+        .task {
+            await self.viewModel.fetchTeams()
+        }
         .overlay(content: {
             if self.viewModel.isLoading {
                 ProgressView()

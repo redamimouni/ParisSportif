@@ -25,14 +25,11 @@ final class LeagueListViewModel: ObservableObject {
 
     private var cachedLeagues: [LeagueModel] = []
 
-    init(useCase: any LeagueListUseCaseProtocol = LeagueListUseCase()) {
+    init(useCase: some LeagueListUseCaseProtocol = LeagueListUseCase()) {
         self.useCase = useCase
-        Task {
-            await self.fetchLeagueList()
-        }
     }
 
-    private func fetchLeagueList() async {
+    func fetchLeagueList() async {
         do {
             let leagueList = try await self.useCase.execute()
             self.cachedLeagues = leagueList.map {

@@ -16,12 +16,12 @@ struct LeagueDetailDTO: Decodable, Equatable {
 struct TeamDTO: Decodable, Equatable {
     let idTeam: String
     let strTeam: String
-    let strTeamBadge: String
+    let strBadge: String
 }
 
 extension TeamDTO {
     func toEntity() throws -> TeamEntity {
-        guard let teamBadge = URL(string: self.strTeamBadge) else { throw PSError.typeConversionError }
+        guard let teamBadge = URL(string: self.strBadge) else { throw PSError.typeConversionError }
         return .init(name: self.strTeam, imageUrl: teamBadge)
     }
 }
