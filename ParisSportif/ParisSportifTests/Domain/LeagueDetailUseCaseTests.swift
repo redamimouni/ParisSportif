@@ -131,12 +131,12 @@ extension TeamDTO {
     static func mock(
         idTeam: String = "1",
         strTeam: String = "PSG",
-        strTeamBadge: String = "www.test.fr/image.jpg"
+        strBadge: String = "www.test.fr/image.jpg"
     ) -> TeamDTO {
         return .init(
             idTeam: idTeam,
             strTeam: strTeam,
-            strTeamBadge: strTeamBadge
+            strBadge: strBadge
         )
     }
 }

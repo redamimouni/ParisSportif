@@ -18,24 +18,22 @@ final class LeagueDetailViewModel: ObservableObject {
 
     init(
         league: LeagueModel,
-        useCase: any LeagueDetailUseCaseProtocol = LeagueDetailUseCase()
+        useCase: some LeagueDetailUseCaseProtocol = LeagueDetailUseCase()
     ) {
         self.selectedLeague = league
         self.useCase = useCase
     }
 
-    func fetchTeams() {
-        Task {
-            do {
-                let leagueDetail = try await self.useCase.execute(league: self.selectedLeague.nameLeague)
-                self.teams = leagueDetail.map {
-                    TeamModel(name: $0.name, imageUrl: $0.imageUrl)
-                }
-                self.isLoading = false
-            } catch {
-                self.isLoading = false
-                self.error = error
+    func fetchTeams() async {
+        do {
+            let leagueDetail = try await self.useCase.execute(league: self.selectedLeague.nameLeague)
+            self.teams = leagueDetail.map {
+                TeamModel(name: $0.name, imageUrl: $0.imageUrl)
             }
+            self.isLoading = false
+        } catch {
+            self.isLoading = false
+            self.error = error
         }
     }
 }

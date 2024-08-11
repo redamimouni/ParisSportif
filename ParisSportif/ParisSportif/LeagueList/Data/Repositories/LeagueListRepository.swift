@@ -14,7 +14,7 @@ protocol LeagueListRepositoryProtocol {
 final class LeagueListRepository: LeagueListRepositoryProtocol {
     private let apiCaller: any APICallerProtocol
 
-    init(apiCaller: any APICallerProtocol = APICaller()) {
+    init(apiCaller: some APICallerProtocol = APICaller()) {
         self.apiCaller = apiCaller
     }
 

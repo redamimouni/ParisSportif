@@ -26,7 +26,7 @@ final class LeagueDetailRepositoryTests: XCTestCase {
                 [.mock(
                     idTeam: "1",
                     strTeam: "PSG",
-                    strTeamBadge: "www.test.fr/image.jpg"
+                    strBadge: "www.test.fr/image.jpg"
                 )],
                 "wrong should be equal to LeagueDetailDTO mock")
         } catch {

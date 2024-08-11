@@ -14,7 +14,7 @@ protocol LeagueDetailUseCaseProtocol {
 final class LeagueDetailUseCase: LeagueDetailUseCaseProtocol {
     private let repository: any LeagueDetailRepositoryProtocol
 
-    init(repository: any LeagueDetailRepositoryProtocol = LeagueDetailRepository()) {
+    init(repository: some LeagueDetailRepositoryProtocol = LeagueDetailRepository()) {
         self.repository = repository
     }
 

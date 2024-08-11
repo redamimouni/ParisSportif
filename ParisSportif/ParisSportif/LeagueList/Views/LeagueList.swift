@@ -23,6 +23,9 @@ struct LeagueList: View {
             }
             .errorAlert(error: self.$viewModel.error)
             .navigationTitle(self.viewModel.navigationTitle)
+            .task {
+                await self.viewModel.fetchLeagueList()
+            }
         }
         .overlay(content: {
             if self.viewModel.isLoading {
