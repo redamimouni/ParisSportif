@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol APICallerProtocol {
+protocol APICallerProtocol: Sendable {
     func perform<T: Decodable>(_ request: URLRequest) async throws -> T
 }
 

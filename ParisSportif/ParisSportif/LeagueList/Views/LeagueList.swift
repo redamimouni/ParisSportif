@@ -27,6 +27,9 @@ struct LeagueList: View {
                 await self.viewModel.fetchLeagueList()
             }
         }
+        .task {
+            await self.viewModel.fetchLeagueList()
+        }
         .overlay(content: {
             if self.viewModel.isLoading {
                 ProgressView()
