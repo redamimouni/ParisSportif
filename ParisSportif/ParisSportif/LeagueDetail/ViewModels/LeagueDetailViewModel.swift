@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 final class LeagueDetailViewModel: ObservableObject {
-    @Published var teams: [TeamModel] = []
+    @Published var teams: [TeamEntity] = []
     @Published var isLoading: Bool = true
     @Published var error: Error?
 
@@ -26,10 +26,7 @@ final class LeagueDetailViewModel: ObservableObject {
 
     func fetchTeams() async {
         do {
-            let leagueDetail = try await self.useCase.execute(league: self.selectedLeague.nameLeague)
-            self.teams = leagueDetail.map {
-                TeamModel(name: $0.name, imageUrl: $0.imageUrl)
-            }
+            self.teams = try await self.useCase.execute(league: self.selectedLeague.nameLeague)
             self.isLoading = false
         } catch {
             self.isLoading = false
