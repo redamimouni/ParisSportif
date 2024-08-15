@@ -38,7 +38,7 @@ class LeagueListRepositoryTests: XCTestCase {
 
         // When
         do {
-            let _ = try await sut.fetchLeagueList()
+            try await sut.fetchLeagueList()
 
             // Then
             XCTFail("Should throw error")
@@ -52,7 +52,7 @@ class LeagueListRepositoryTests: XCTestCase {
 final class APICallerMock: APICallerProtocol {
     var stubbedFetchResult: Decodable?
 
-    func perform<T>(_ request: URLRequest) async throws -> T where T : Decodable {
+    func perform<T>(_ request: URLRequest?) async throws -> T where T : Decodable {
         guard let result = stubbedFetchResult else { throw PSError.httpRequestError}
         return result as! T
     }

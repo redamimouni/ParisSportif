@@ -45,7 +45,7 @@ final class LeagueDetailRepositoryTests: XCTestCase {
 
         // When
         do {
-            let _ = try await sut.fetchLeagueDetail(for: "Ligue 1")
+            try await sut.fetchLeagueDetail(for: "Ligue 1")
 
             // Then
             XCTFail("Should not throw error")

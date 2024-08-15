@@ -19,6 +19,7 @@ final class LeagueDetailRepository: LeagueDetailRepositoryProtocol {
         self.apiCaller = apiCaller
     }
 
+    @discardableResult
     func fetchLeagueDetail(for name: String) async throws -> [TeamDTO] {
         do {
             let dto: LeagueDetailDTO = try await self.apiCaller.perform(.searchAllTeams(name: name))

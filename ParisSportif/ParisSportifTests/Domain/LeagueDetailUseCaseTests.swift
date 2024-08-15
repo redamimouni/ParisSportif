@@ -104,7 +104,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
 
         // When
         do {
-            let _ = try await sut.execute(league: "Ligue 1")
+            try await sut.execute(league: "Ligue 1")
 
             // Then
             XCTFail("Should throw error")

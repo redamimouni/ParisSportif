@@ -38,7 +38,7 @@ final class LeagueListUseCaseTests: XCTestCase {
 
         // When
         do {
-            let _ = try await sut.execute()
+            try await sut.execute()
 
             // Then
             XCTFail("Should throw error")

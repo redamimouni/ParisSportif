@@ -18,6 +18,7 @@ final class LeagueDetailUseCase: LeagueDetailUseCaseProtocol {
         self.repository = repository
     }
 
+    @discardableResult
     func execute(league: String) async throws -> [TeamEntity] {
         let teams = try await self.repository.fetchLeagueDetail(for: league)
             .map {
