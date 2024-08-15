@@ -7,6 +7,7 @@
 
 import Foundation
 import XCTest
+import APICaller
 @testable import ParisSportif
 
 final class LeagueDetailViewModelTests: XCTestCase {

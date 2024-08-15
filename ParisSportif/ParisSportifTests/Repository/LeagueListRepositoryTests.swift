@@ -7,6 +7,7 @@
 
 import Foundation
 import XCTest
+import APICaller
 @testable import ParisSportif
 
 class LeagueListRepositoryTests: XCTestCase {
@@ -23,7 +24,7 @@ class LeagueListRepositoryTests: XCTestCase {
             let result = try await sut.fetchLeagueList()
 
             // Then
-            XCTAssertEqual(result, [.mock()], "wrong should be equal to LeagueDTO mock")
+            XCTAssertEqual(result, [.mock], "wrong should be equal to LeagueDTO mock")
         } catch {
             XCTFail("Should not throw error")
         }
@@ -54,14 +55,5 @@ final class APICallerMock: APICallerProtocol {
     func perform<T>(_ request: URLRequest) async throws -> T where T : Decodable {
         guard let result = stubbedFetchResult else { throw PSError.httpRequestError}
         return result as! T
-    }
-}
-
-extension LeagueDTO {
-    static func mock() -> LeagueDTO {
-        return .init(idLeague: "4328",
-                     strLeague: "English Premier League",
-                     strSport: "Soccer",
-                     strLeagueAlternate: "Premier League, EPL")
     }
 }

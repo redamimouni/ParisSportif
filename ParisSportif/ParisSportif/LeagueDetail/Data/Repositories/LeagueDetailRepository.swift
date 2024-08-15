@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import APICaller
 
 protocol LeagueDetailRepositoryProtocol: Sendable {
     func fetchLeagueDetail(for name: String) async throws -> [TeamDTO]
@@ -30,5 +31,22 @@ final class LeagueDetailRepository: LeagueDetailRepositoryProtocol {
         } catch {
             throw PSError.errorDataFetch
         }
+    }
+}
+
+extension TeamDTO {
+    func toEntity() throws -> TeamEntity {
+        guard let teamBadge = URL(string: self.strBadge),
+              let id = Int(self.idTeam)
+        else { throw PSError.typeConversionError }
+        return .init(
+            id: id,
+            name: self.strTeam,
+            badgeImageUrl: teamBadge,
+            bannerImageUrl: strBanner.flatMap { URL(string: $0) },
+            country: self.strCountry,
+            league: self.strLeague,
+            descriptionEN: self.strDescriptionEN
+        )
     }
 }

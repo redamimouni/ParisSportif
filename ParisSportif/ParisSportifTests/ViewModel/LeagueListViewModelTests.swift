@@ -7,6 +7,7 @@
 
 import Foundation
 import XCTest
+import APICaller
 @testable import ParisSportif
 
 final class LeagueListViewModelTests: XCTestCase {
@@ -106,17 +107,5 @@ private final class LeagueListUseCaseMock: LeagueListUseCaseProtocol {
             throw PSError.errorDataFetch
         }
         return result
-    }
-}
-
-extension LeagueEntity {
-    static func mock(strLeague: String = "Ligue 1") -> LeagueEntity {
-        .init(idLeague: 1, strLeague: strLeague)
-    }
-}
-
-extension LeagueModel {
-    static func mock(nameLeague: String = "Ligue 1") -> LeagueModel {
-        .init(idLeague: 1, nameLeague: nameLeague)
     }
 }
