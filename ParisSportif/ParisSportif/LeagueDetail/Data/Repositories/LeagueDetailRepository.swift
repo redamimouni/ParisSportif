@@ -19,12 +19,10 @@ final class LeagueDetailRepository: LeagueDetailRepositoryProtocol {
         self.apiCaller = apiCaller
     }
 
+    @discardableResult
     func fetchLeagueDetail(for name: String) async throws -> [TeamDTO] {
-        guard let request = URLRequest.buildRequest(from: APIEndpoints.searchAllTeams(for: name)) else {
-            throw PSError.wrongUrlError
-        }
         do {
-            let dto: LeagueDetailDTO = try await self.apiCaller.perform(request)
+            let dto: LeagueDetailDTO = try await self.apiCaller.perform(.searchAllTeams(name: name))
             return dto.teams
         } catch is PSError {
             throw PSError.parsingError
