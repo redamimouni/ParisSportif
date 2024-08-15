@@ -13,7 +13,7 @@ final class LeagueDetailViewModel: ObservableObject {
     @Published var isLoading: Bool = true
     @Published var error: Error?
 
-    private let selectedLeague: LeagueModel
+    private(set) var selectedLeague: LeagueModel
     private let useCase: any LeagueDetailUseCaseProtocol
 
     init(

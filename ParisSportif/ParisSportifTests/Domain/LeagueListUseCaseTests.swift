@@ -9,8 +9,9 @@ import Foundation
 import XCTest
 @testable import ParisSportif
 
-class LeagueListUseCaseTests: XCTestCase {
-    
+final class LeagueListUseCaseTests: XCTestCase {
+
+    @MainActor
     func test_fetchLeagueList_shouldSuccess() async {
         // Given
         let repositoryMock = LeagueListRepositoryMock()
@@ -28,6 +29,7 @@ class LeagueListUseCaseTests: XCTestCase {
         }
     }
 
+    @MainActor
     func test_fetchLeagueList_shouldThrowFetchingError() async {
         // Given
         let repositoryMock = LeagueListRepositoryMock()
@@ -49,8 +51,9 @@ class LeagueListUseCaseTests: XCTestCase {
     }
 }
 
-private class LeagueListRepositoryMock: LeagueListRepositoryProtocol {
-    
+@MainActor
+private final class LeagueListRepositoryMock: LeagueListRepositoryProtocol {
+
     var stubbedFetchResult: [LeagueDTO]?
 
     func fetchLeagueList() async throws -> [LeagueDTO] {

@@ -10,6 +10,8 @@ import XCTest
 @testable import ParisSportif
 
 final class LeagueDetailUseCaseTests: XCTestCase {
+
+    @MainActor
     func test_execute_givenOneTeam_shoudReturnOneEntity() async {
         // Given
         let repositoryMock = LeagueDetailRepositoryMock()
@@ -27,6 +29,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
         }
     }
 
+    @MainActor
     func test_execute_givenThreeTeams_shoudReturnTwoEntities() async {
         // Given
         let repositoryMock = LeagueDetailRepositoryMock()
@@ -53,6 +56,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
         }
     }
 
+    @MainActor
     func test_execute_givenTenTeams_shoudReturnFiveEntitiesSortByAntiAlphabetic() async {
         // Given
         let repositoryMock = LeagueDetailRepositoryMock()
@@ -91,6 +95,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
         }
     }
 
+    @MainActor
     func test_execute_shoudThrowFetchingError() async {
         // Given
         let repositoryMock = LeagueDetailRepositoryMock()
@@ -112,6 +117,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
     }
 }
 
+@MainActor
 private final class LeagueDetailRepositoryMock: LeagueDetailRepositoryProtocol {
     var stubbedFetchResult: [TeamDTO]?
 

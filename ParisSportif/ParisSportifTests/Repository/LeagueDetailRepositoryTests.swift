@@ -10,6 +10,8 @@ import XCTest
 @testable import ParisSportif
 
 final class LeagueDetailRepositoryTests: XCTestCase {
+
+    @MainActor
     func test_fetchLeagueDetail_shouldReturnSuccess() async throws {
         // Given
         let apiCallerMock = APICallerMock()
@@ -34,6 +36,7 @@ final class LeagueDetailRepositoryTests: XCTestCase {
         }
     }
 
+    @MainActor
     func test_fetchLeagueDetail_shouldThrowParsingDataError() async throws {
         // Given
         let apiCallerMock = APICallerMock()

@@ -23,6 +23,8 @@ struct LeagueDetail: View {
                 }
             }
         }
+        .navigationTitle(self.viewModel.selectedLeague.nameLeague)
+        .navigationBarTitleDisplayMode(.automatic)
         .errorAlert(error: self.$viewModel.error)
         .task {
             await self.viewModel.fetchTeams()
