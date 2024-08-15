@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,6 +27,7 @@
 		0E76817C2B331BD500DBA0DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E76817B2B331BD500DBA0DF /* Assets.xcassets */; };
 		0E76817F2B331BD500DBA0DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E76817E2B331BD500DBA0DF /* Preview Assets.xcassets */; };
 		0E7681A52B33227600DBA0DF /* LeagueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7681A42B33227600DBA0DF /* LeagueListViewModel.swift */; };
+		0E9D96482C6E384700548C91 /* APICaller in Frameworks */ = {isa = PBXBuildFile; productRef = 0E9D96472C6E384700548C91 /* APICaller */; };
 		0EA15E3B2B34815400DD1E02 /* LeagueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E3A2B34815400DD1E02 /* LeagueModel.swift */; };
 		0EA15E3F2B3490E900DD1E02 /* LeagueListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E3E2B3490E900DD1E02 /* LeagueListUseCase.swift */; };
 		0EA15E422B3491A600DD1E02 /* LeagueListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA15E412B3491A600DD1E02 /* LeagueListRepository.swift */; };
@@ -58,7 +59,6 @@
 		0E1FE25C2B3C93BC00F0255C /* LeagueDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailViewModelTests.swift; sourceTree = "<group>"; };
 		0E301BFD2B3D7D990055AA7B /* LeagueDetailUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailUseCaseTests.swift; sourceTree = "<group>"; };
 		0E301BFF2B3D89530055AA7B /* LeagueDetailRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailRepositoryTests.swift; sourceTree = "<group>"; };
-		0E58322A2C6E19B200B543B3 /* APICaller */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = APICaller; path = ../../APICaller; sourceTree = "<group>"; };
 		0E58322E2C6E1E5900B543B3 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Mocks.swift; path = ../../Mocks.swift; sourceTree = "<group>"; };
 		0E65E8352C691D8100253C18 /* TeamDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailViewModel.swift; sourceTree = "<group>"; };
 		0E65E83C2C691E6600253C18 /* TeamDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailView.swift; sourceTree = "<group>"; };
@@ -83,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E9D96482C6E384700548C91 /* APICaller in Frameworks */,
 				0E58322D2C6E1B9800B543B3 /* APICaller in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,7 +212,6 @@
 		0E76816B2B331BD400DBA0DF = {
 			isa = PBXGroup;
 			children = (
-				0E58322A2C6E19B200B543B3 /* APICaller */,
 				0E7681762B331BD400DBA0DF /* ParisSportif */,
 				0E7681872B331BD500DBA0DF /* ParisSportifTests */,
 				0E7681752B331BD400DBA0DF /* Products */,
@@ -366,6 +366,7 @@
 			name = ParisSportif;
 			packageProductDependencies = (
 				0E58322C2C6E1B9800B543B3 /* APICaller */,
+				0E9D96472C6E384700548C91 /* APICaller */,
 			);
 			productName = ParisSportif;
 			productReference = 0E7681742B331BD400DBA0DF /* ParisSportif.app */;
@@ -418,6 +419,7 @@
 			);
 			mainGroup = 0E76816B2B331BD400DBA0DF;
 			packageReferences = (
+				0E9D96462C6E384700548C91 /* XCLocalSwiftPackageReference "../APICaller" */,
 			);
 			productRefGroup = 0E7681752B331BD400DBA0DF /* Products */;
 			projectDirPath = "";
@@ -741,8 +743,19 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		0E9D96462C6E384700548C91 /* XCLocalSwiftPackageReference "../APICaller" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../APICaller;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		0E58322C2C6E1B9800B543B3 /* APICaller */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = APICaller;
+		};
+		0E9D96472C6E384700548C91 /* APICaller */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = APICaller;
 		};
