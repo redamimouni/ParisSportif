@@ -14,15 +14,6 @@ struct TeamDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                if let teamBannerURL = viewModel.team.bannerImageUrl {
-                    AsyncImage(url: teamBannerURL) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(1000 / 185, contentMode: .fit)
-                    } placeholder: {
-                        ProgressView()
-                    }
-                }
                 VStack(alignment: .leading, spacing: 10) {
                     if let teamCountry = viewModel.team.country {
                         Text(teamCountry)
@@ -40,14 +31,18 @@ struct TeamDetailView: View {
                     }
                 }
                 .padding(8)
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(viewModel.team.name)
-                        .bold()
+                if let teamBannerURL = viewModel.team.bannerImageUrl {
+                    AsyncImage(url: teamBannerURL) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(1000 / 185, contentMode: .fit)
+                    } placeholder: {
+                        ProgressView()
+                    }
                 }
             }
         }
+        .navigationTitle(viewModel.team.name)
+        .navigationBarTitleDisplayMode(.automatic)
     }
 }

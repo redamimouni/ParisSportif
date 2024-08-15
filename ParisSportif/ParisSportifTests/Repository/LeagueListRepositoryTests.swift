@@ -11,6 +11,7 @@ import XCTest
 
 class LeagueListRepositoryTests: XCTestCase {
     
+    @MainActor
     func test_fetchLeagueList_shouldReturnSuccess() async throws {
         // Given
         let apiCallerMock = APICallerMock()
@@ -28,6 +29,7 @@ class LeagueListRepositoryTests: XCTestCase {
         }
     }
 
+    @MainActor
     func test_fetchLeagueList_shouldThrowParsingDataError() async throws {
         // Given
         let apiCallerMock = APICallerMock()
@@ -45,6 +47,7 @@ class LeagueListRepositoryTests: XCTestCase {
     }
 }
 
+@MainActor
 final class APICallerMock: APICallerProtocol {
     var stubbedFetchResult: Decodable?
 

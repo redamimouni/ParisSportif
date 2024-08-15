@@ -10,6 +10,7 @@ import XCTest
 @testable import ParisSportif
 
 final class APICallerTests: XCTestCase {
+    @MainActor
     func test_perform_shouldReturnLeagueListDTO() async throws {
         // Given
         let resultJson = #"{"leagues": [{"idLeague":"4328","strLeague":"English Premier League","strSport":"Soccer","strLeagueAlternate":"Premier League, EPL"}]}"#
@@ -31,6 +32,7 @@ final class APICallerTests: XCTestCase {
         }
     }
 
+    @MainActor
     func test_perform_shouldReturnLeagueDetailDTO() async throws {
         // Given
         let resultJson = #"{"teams":[{"idTeam": "1", "strTeam": "PSG", "strBadge": "https://www.thesportsdb.com/images/media/team/badge/rwqrrq1473504808.png", "strDescriptionEN": "Lorem ipsum", "strBanner": "https://www.thesportsdb.com/images/media/team/banner/wvaw7l1641382901.jpg", "strCountry": "France", "strLeague": "Ligue 1"}]}"#
@@ -52,6 +54,7 @@ final class APICallerTests: XCTestCase {
         }
     }
 
+    @MainActor
     func test_perform_leagueList_shouldThrowParsingError() async throws {
         // Given
         let resultJson = #"{"toto":[{"idTeam": "1", "strTeam": "PSG", "strBadge": "www.test.fr/image.jpg"}]}"#
@@ -73,6 +76,7 @@ final class APICallerTests: XCTestCase {
         }
     }
 
+    @MainActor
     func test_perform_leagueDetail_shouldThrowParsingError() async throws {
         // Given
         let resultJson = #"{"toto": [{"idLeague":"4328","strLeague":"English Premier League","strSport":"Soccer","strLeagueAlternate":"Premier League, EPL"}]}"#
@@ -94,6 +98,7 @@ final class APICallerTests: XCTestCase {
         }
     }
 
+    @MainActor
     func test_perform_shouldThrowHttpRequestError() async throws {
         // Given
         let resultJson = #"{"teams":[{"idTeam": "1", "strTeam": "PSG", "strBadge": "www.test.fr/image.jpg"}]}"#
@@ -115,6 +120,7 @@ final class APICallerTests: XCTestCase {
     }
 }
 
+@MainActor
 final class URLSessionMock: URLSessionProtocol {
     var stubbedFetchResult: (Data, URLResponse)?
 
