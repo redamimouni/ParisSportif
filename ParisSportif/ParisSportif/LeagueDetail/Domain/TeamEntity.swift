@@ -7,9 +7,14 @@
 
 import Foundation
 
-struct TeamEntity {
+struct TeamEntity: Identifiable {
+    let id: Int
     let name: String
-    let imageUrl: URL
+    let badgeImageUrl: URL?
+    let bannerImageUrl: URL?
+    let country: String?
+    let league: String?
+    let descriptionEN: String?
 }
 
 extension TeamEntity: Comparable {

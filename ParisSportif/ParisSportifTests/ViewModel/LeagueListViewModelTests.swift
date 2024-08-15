@@ -130,7 +130,7 @@ class LeagueListViewModelTests: XCTestCase {
     }
 }
 
-private class LeagueListUseCaseMock: LeagueListUseCaseProtocol {
+private final class LeagueListUseCaseMock: LeagueListUseCaseProtocol {
     @Published private(set) var invokedFetch = false
     var invokedFetchCount = 0
     var stubbedFetchResult: [LeagueEntity]?

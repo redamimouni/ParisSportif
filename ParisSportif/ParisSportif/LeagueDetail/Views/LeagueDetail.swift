@@ -14,8 +14,12 @@ struct LeagueDetail: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns) {
-                ForEach(self.viewModel.teams, id: \.self) { team in
-                    TeamView(team: team)
+                ForEach(self.viewModel.teams) { team in
+                    NavigationLink {
+                        TeamDetailView(viewModel: TeamDetailViewModel(team: team))
+                    } label: {
+                        TeamView(team: team)
+                    }
                 }
             }
         }

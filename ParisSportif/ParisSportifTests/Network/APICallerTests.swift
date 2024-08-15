@@ -33,7 +33,7 @@ final class APICallerTests: XCTestCase {
 
     func test_perform_shouldReturnLeagueDetailDTO() async throws {
         // Given
-        let resultJson = #"{"teams":[{"idTeam": "1", "strTeam": "PSG", "strBadge": "www.test.fr/image.jpg"}]}"#
+        let resultJson = #"{"teams":[{"idTeam": "1", "strTeam": "PSG", "strBadge": "https://www.thesportsdb.com/images/media/team/badge/rwqrrq1473504808.png", "strDescriptionEN": "Lorem ipsum", "strBanner": "https://www.thesportsdb.com/images/media/team/banner/wvaw7l1641382901.jpg", "strCountry": "France", "strLeague": "Ligue 1"}]}"#
         let sessionMock = URLSessionMock()
         let data = try XCTUnwrap(resultJson.data(using: .utf8), "fail to unwrap")
         let responseMock = HTTPURLResponse(url: .init(string: "www.image.fr")!, statusCode: 200, httpVersion: nil, headerFields: nil)! as URLResponse

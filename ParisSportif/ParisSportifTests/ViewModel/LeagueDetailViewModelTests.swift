@@ -26,15 +26,11 @@ final class LeagueDetailViewModelTests: XCTestCase {
     }
 
     @MainActor 
-    func test_fetchTeams_shouldReturnTeams() {
+    func test_fetchTeams_shouldReturnTeams() async {
         // Given
         let taskExpectation = XCTestExpectation()
         let useCaseMock = LeagueDetailUseCaseMock()
-        do {
-            useCaseMock.stubbedFetchResult = [try .mock()]
-        } catch {
-            XCTFail("fail to set stub")
-        }
+        useCaseMock.stubbedFetchResult = [.psg]
         useCaseMock.$invokedFetch
             .filter { $0 }
             .sink { _ in
@@ -45,16 +41,16 @@ final class LeagueDetailViewModelTests: XCTestCase {
         let sut = LeagueDetailViewModel(league: .mock(), useCase: useCaseMock)
 
         // When
-        sut.fetchTeams()
+        await sut.fetchTeams()
 
         // Then
         wait(for: [taskExpectation])
-        XCTAssertEqual(sut.teams, [.mock()], "wrong teams should equal to mock")
+        XCTAssertEqual(sut.teams, [.psg], "wrong teams should equal to psg")
         XCTAssertFalse(sut.isLoading, "wrong isLoading should be false")
     }
 
     @MainActor 
-    func test_fetchTeams_shouldSetError() {
+    func test_fetchTeams_shouldSetError() async {
         // Given
         let taskExpectation = XCTestExpectation()
         let useCaseMock = LeagueDetailUseCaseMock()
@@ -68,7 +64,7 @@ final class LeagueDetailViewModelTests: XCTestCase {
         let sut = LeagueDetailViewModel(league: .mock(), useCase: useCaseMock)
 
         // When
-        sut.fetchTeams()
+        await sut.fetchTeams()
 
         // Then
         wait(for: [taskExpectation])
@@ -78,7 +74,7 @@ final class LeagueDetailViewModelTests: XCTestCase {
     }
 }
 
-private class LeagueDetailUseCaseMock: LeagueDetailUseCaseProtocol {
+private final class LeagueDetailUseCaseMock: LeagueDetailUseCaseProtocol {
     @Published private(set) var invokedFetch = false
     var invokedFetchCount = 0
     var stubbedFetchResult: [TeamEntity]?
@@ -92,18 +88,5 @@ private class LeagueDetailUseCaseMock: LeagueDetailUseCaseProtocol {
             throw PSError.errorDataFetch
         }
         return result
-    }
-}
-
-extension TeamEntity {
-    static func mock(name: String = "PSG") throws -> TeamEntity {
-        let url = try XCTUnwrap(URL(string: "www.test.fr/image.jpg"))
-        return .init(name: name, imageUrl: url)
-    }
-}
-
-extension TeamModel {
-    static func mock() -> TeamModel {
-        return .init(name: "PSG", imageUrl: URL(string: "www.test.fr/image.jpg"))
     }
 }

@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct TeamView: View {
-    private let team: TeamModel
+    private let team: TeamEntity
 
-    init(team: TeamModel) {
+    init(team: TeamEntity) {
         self.team = team
     }
 
     var body: some View {
         VStack {
-            AsyncImage(url: team.imageUrl, transaction: .init(animation: .bouncy)) { phase in
+            AsyncImage(url: team.badgeImageUrl, transaction: .init(animation: .bouncy)) { phase in
                 switch phase {
                 case .empty:
                     ProgressView()
@@ -36,5 +36,5 @@ struct TeamView: View {
 }
 
 #Preview {
-    TeamView(team: .init(name: "Man City", imageUrl: URL(string: "https://www.thesportsdb.com/images/media/team/badge/vwpvry1467462651.png")))
+    TeamView(team: .psg)
 }

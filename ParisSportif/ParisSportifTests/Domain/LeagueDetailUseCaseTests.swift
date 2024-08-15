@@ -13,7 +13,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
     func test_execute_givenOneTeam_shoudReturnOneEntity() async {
         // Given
         let repositoryMock = LeagueDetailRepositoryMock()
-        repositoryMock.stubbedFetchResult = [.mock()]
+        repositoryMock.stubbedFetchResult = [.psg]
         let sut = LeagueDetailUseCase(repository: repositoryMock)
 
         // When
@@ -21,7 +21,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
             let result = try await sut.execute(league: "Ligue 1")
 
             // Then
-            XCTAssertEqual(result, [try .mock()])
+            XCTAssertEqual(result, [.psg])
         } catch {
             XCTFail("Should not throw error")
         }
@@ -31,10 +31,10 @@ final class LeagueDetailUseCaseTests: XCTestCase {
         // Given
         let repositoryMock = LeagueDetailRepositoryMock()
         repositoryMock.stubbedFetchResult = [
-            .mock(strTeam: "PSG"),
-            .mock(strTeam: "ManU"),
-            .mock(strTeam: "OM"),
-            .mock(strTeam: "OL")
+            .psg,
+            .marseille,
+            .arsenal,
+            .monaco
         ]
         let sut = LeagueDetailUseCase(repository: repositoryMock)
 
@@ -45,7 +45,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
             // Then
             XCTAssertEqual(
                 result,
-                try [.mock(name: "PSG"),.mock(name: "OM")],
+                [.psg, .arsenal],
                 "wrong should return PSG then OM"
             )
         } catch {
@@ -77,7 +77,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
             // Then
             XCTAssertEqual(
                 result,
-                try [
+                [
                     .mock(name: "I"),
                     .mock(name: "G"),
                     .mock(name: "E"),
@@ -112,7 +112,7 @@ final class LeagueDetailUseCaseTests: XCTestCase {
     }
 }
 
-private class LeagueDetailRepositoryMock: LeagueDetailRepositoryProtocol {
+private final class LeagueDetailRepositoryMock: LeagueDetailRepositoryProtocol {
     var stubbedFetchResult: [TeamDTO]?
 
     func fetchLeagueDetail(for name: String) async throws -> [TeamDTO] {
@@ -124,19 +124,5 @@ private class LeagueDetailRepositoryMock: LeagueDetailRepositoryProtocol {
 extension LeagueDetailDTO {
     static func mock(teams: [TeamDTO] = [.mock()]) -> LeagueDetailDTO {
         return .init(teams: teams)
-    }
-}
-
-extension TeamDTO {
-    static func mock(
-        idTeam: String = "1",
-        strTeam: String = "PSG",
-        strBadge: String = "www.test.fr/image.jpg"
-    ) -> TeamDTO {
-        return .init(
-            idTeam: idTeam,
-            strTeam: strTeam,
-            strBadge: strBadge
-        )
     }
 }
