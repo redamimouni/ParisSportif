@@ -7,6 +7,7 @@
 
 import Foundation
 import XCTest
+import APICaller
 @testable import ParisSportif
 
 final class LeagueDetailUseCaseTests: XCTestCase {
@@ -124,11 +125,5 @@ private final class LeagueDetailRepositoryMock: LeagueDetailRepositoryProtocol {
     func fetchLeagueDetail(for name: String) async throws -> [TeamDTO] {
         guard let result = stubbedFetchResult else { throw PSError.errorDataFetch }
         return result
-    }
-}
-
-extension LeagueDetailDTO {
-    static func mock(teams: [TeamDTO] = [.mock()]) -> LeagueDetailDTO {
-        return .init(teams: teams)
     }
 }

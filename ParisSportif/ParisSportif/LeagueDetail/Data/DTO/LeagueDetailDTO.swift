@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import APICaller
 
 // MARK: - LeagueDetailDTO
 struct LeagueDetailDTO: Decodable, Equatable {
